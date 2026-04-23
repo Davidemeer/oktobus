@@ -1,0 +1,25 @@
+{
+  "site": {
+    "company_name": "Oktobus",
+    "tagline": "Custom AI software for SMBs."
+  },
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "method": "Method",
+    "services": "Services",
+    "cases": "Cases",
+    "contact": "Contact"
+  },
+  "home": {
+    "hero_title": "Custom AI software, for businesses who want more than a subscription.",
+    "hero_subtitle": "We build prototypes in 4 weeks for €10k. Then we decide the next step together.",
+    "cta_primary": "Schedule intro call",
+    "cta_secondary": "See how we work"
+  },
+  "footer": {
+    "rights": "All rights reserved.",
+    "privacy": "Privacy",
+    "terms": "Terms"
+  }
+}

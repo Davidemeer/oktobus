@@ -1,0 +1,25 @@
+{
+  "site": {
+    "company_name": "Oktobus",
+    "tagline": "AI-software op maat voor MKB."
+  },
+  "nav": {
+    "home": "Home",
+    "about": "Over ons",
+    "method": "Werkwijze",
+    "services": "Diensten",
+    "cases": "Cases",
+    "contact": "Contact"
+  },
+  "home": {
+    "hero_title": "AI-software op maat, voor bedrijven die meer willen dan een abonnement.",
+    "hero_subtitle": "We bouwen prototypes in 4 weken voor €10k. Dan beslis je samen wat de volgende stap is.",
+    "cta_primary": "Plan kennismaking",
+    "cta_secondary": "Bekijk werkwijze"
+  },
+  "footer": {
+    "rights": "Alle rechten voorbehouden.",
+    "privacy": "Privacy",
+    "terms": "Voorwaarden"
+  }
+}
