@@ -8,17 +8,13 @@ type TeaserRowProps = {
 };
 
 /**
- * Belofte-teaser row used on the home page.
- * Slightly fuller than IndexRow because it carries a 1-line sub.
- *
- *   [pnum]   Title                                          [↗]
- *            Sub line in muted body
- *
- * Non-clickable (the page-level CTA below the rows handles navigation).
+ * Belofte-teaser row used on the home page. Borderless on purpose —
+ * stacking creates rhythm via the parent's gap; per-row hairlines were
+ * removed to reduce visual noise (DESIGN.md §4.4: don't stack hairlines).
  */
 export function TeaserRow({ number, title, description }: TeaserRowProps) {
   return (
-    <div className="grid grid-cols-[60px_1fr_40px] sm:grid-cols-[80px_1fr_60px] items-start gap-6 py-7 border-t border-[color:var(--color-line-hair)]">
+    <div className="grid grid-cols-[60px_1fr_40px] sm:grid-cols-[80px_1fr_60px] items-start gap-6 py-5">
       <span className="font-sans font-medium text-[28px] sm:text-[32px] leading-none tracking-[-0.04em] text-ink">
         {number}
       </span>

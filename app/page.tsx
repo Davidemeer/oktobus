@@ -10,7 +10,8 @@ import { OctopusLogo } from '@/components/marks/octopus-logo';
 import { RiseIn } from '@/components/motion/rise-in';
 import { FadeIn } from '@/components/motion/fade-in';
 import { TeaserRow } from '@/components/sections/teaser-row';
-import { IndexRow } from '@/components/sections/index-row';
+import { PillarBento } from '@/components/sections/pillar-bento';
+import { StatStrip } from '@/components/sections/stat-strip';
 import { InkDrawDivider } from '@/components/sections/ink-draw-divider';
 import { CTABlock } from '@/components/sections/cta-block';
 
@@ -20,9 +21,9 @@ export default function HomePage() {
   return (
     <>
       {/* ============== HERO ============== */}
-      <section className="relative">
+      <section>
         <Container className="pt-20 pb-20 sm:pt-32 sm:pb-28">
-          {/* Index marker */}
+          {/* Index marker — only hairline in this block */}
           <RiseIn>
             <div className="flex items-center gap-4 mb-12 sm:mb-16">
               <Eyebrow>001 — INDEX</Eyebrow>
@@ -54,7 +55,7 @@ export default function HomePage() {
               </h1>
             </div>
 
-            {/* Meta column */}
+            {/* Meta column — second hairline (intentional) */}
             <div className="lg:col-span-3 lg:pt-4">
               <FadeIn delay={0.45}>
                 <Num>→ 001 / STUDIO</Num>
@@ -100,31 +101,25 @@ export default function HomePage() {
           </div>
         </Container>
 
-        {/* InkDraw signatuur */}
+        {/* InkDraw signature */}
         <Container className="pb-10 sm:pb-14">
           <InkDrawDivider />
         </Container>
       </section>
 
-      {/* ============== WIE WE ZIJN ============== */}
-      <section className="border-t border-[color:var(--color-line-hair)]">
-        <Container className="py-20 sm:py-28">
-          <RiseIn>
-            <div className="flex items-center gap-4 mb-12">
-              <Eyebrow>002 — WIE</Eyebrow>
-              <Hairline className="flex-1" />
-            </div>
-          </RiseIn>
+      {/* ============== WIE WE ZIJN — borderless, rhythm via spacing ============== */}
+      <section>
+        <Container className="py-24 sm:py-32">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
             <div className="lg:col-span-9">
-              <RiseIn delay={0.05}>
+              <RiseIn>
                 <Display size="md" as="p">
                   Oktobus is een klein team van drie. Product, design en engineering in één.
                 </Display>
               </RiseIn>
             </div>
             <div className="lg:col-span-3 lg:pt-3">
-              <FadeIn delay={0.2}>
+              <FadeIn delay={0.15}>
                 <Body className="max-w-[280px]">
                   Geen tussenlagen, geen accountmanagers — je werkt direct met de mensen die bouwen.
                 </Body>
@@ -134,22 +129,83 @@ export default function HomePage() {
         </Container>
       </section>
 
-      {/* ============== BELOFTE TEASER ============== */}
-      <section className="border-t border-[color:var(--color-line-hair)]">
+      {/* ============== DRIE PIJLERS — bento composition ============== */}
+      <section>
         <Container className="py-20 sm:py-28">
           <RiseIn>
-            <div className="flex items-end justify-between flex-wrap gap-6 mb-10 sm:mb-14">
-              <div className="flex items-center gap-4 flex-1 min-w-[260px]">
-                <Eyebrow>003 — BELOFTE</Eyebrow>
-                <Hairline className="flex-1" />
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 mb-12 sm:mb-16">
+              <div className="lg:col-span-7">
+                <Num>WERKWIJZE</Num>
+                <Display size="md" as="h2" className="mt-4 max-w-[640px]">
+                  Hoe we bouwen
+                </Display>
               </div>
-              <Display size="sm" as="h2" className="w-full mt-4">
-                Wat je van ons mag verwachten
-              </Display>
+              <div className="lg:col-span-5 lg:pt-3">
+                <Body className="max-w-[420px]">
+                  Snelheid zonder kwaliteitsverlies komt uit drie dingen die we goed hebben geregeld.
+                  Géén toeval, géén held-werk.
+                </Body>
+              </div>
             </div>
           </RiseIn>
 
-          <div className="border-b border-[color:var(--color-line-hair)]">
+          <RiseIn delay={0.1}>
+            <PillarBento
+              cards={[
+                {
+                  number: '01',
+                  title: 'Snelle, betrouwbare bouwstraat',
+                  description:
+                    'Herbruikbare bouwstenen voor wat in elk project terugkomt — inlog, rechten, koppelingen, AI-integraties. Ingebouwde checks die bij elke wijziging draaien. We starten niet bij nul.',
+                  tags: ['AUTH', 'CI/CD', 'OBSERVABILITY', 'EVALS'],
+                  href: '/werkwijze#pijler-1',
+                },
+                {
+                  number: '02',
+                  title: 'Diepe software-kennis',
+                  description:
+                    'We weten wat onder de motorkap zit. Welke database, welk LLM-pad, waar wel en niet een shortcut. Software die over twee jaar nog mee kan.',
+                  href: '/werkwijze#pijler-2',
+                },
+                {
+                  number: '03',
+                  title: 'Builders met product- en strategiegevoel',
+                  description:
+                    'Geen developers die wachten op een spec. We denken mee over wat je écht nodig hebt en hoe het past bij je ICT-landschap.',
+                  href: '/werkwijze#pijler-3',
+                },
+              ]}
+            />
+          </RiseIn>
+        </Container>
+      </section>
+
+      {/* ============== TRUST-ANCHOR STAT STRIP ============== */}
+      <StatStrip
+        eyebrow="WAT JE KRIJGT"
+        stats={[
+          { label: '→ TIJD TOT LIVE', value: '6–12', sub: 'weken' },
+          { label: '→ EIGEN CODE', value: '100%', sub: 'overdracht inbegrepen' },
+          { label: '→ INGEBOUWD', value: 'tests · evals', sub: 'vanaf dag één' },
+          { label: '→ VOLGEND SLOT', value: 'Q3 ’26', pulse: true },
+        ]}
+      />
+
+      {/* ============== BELOFTE TEASER — borderless rows ============== */}
+      <section>
+        <Container className="py-20 sm:py-28">
+          <RiseIn>
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 mb-12 sm:mb-14">
+              <div className="lg:col-span-7">
+                <Num>BELOFTE</Num>
+                <Display size="md" as="h2" className="mt-4 max-w-[640px]">
+                  Wat je van ons mag verwachten
+                </Display>
+              </div>
+            </div>
+          </RiseIn>
+
+          <div className="divide-y divide-[color:var(--color-line-soft)]">
             <RiseIn delay={0.05}>
               <TeaserRow
                 number="01"
@@ -186,67 +242,13 @@ export default function HomePage() {
         </Container>
       </section>
 
-      {/* ============== WERKWIJZE TEASER ============== */}
-      <section className="border-t border-[color:var(--color-line-hair)]">
-        <Container className="py-20 sm:py-28">
-          <RiseIn>
-            <div className="flex items-end justify-between flex-wrap gap-6 mb-10 sm:mb-14">
-              <div className="flex items-center gap-4 flex-1 min-w-[260px]">
-                <Eyebrow>004 — WERKWIJZE</Eyebrow>
-                <Hairline className="flex-1" />
-              </div>
-              <Display size="sm" as="h2" className="w-full mt-4">
-                Hoe we bouwen
-              </Display>
-            </div>
-          </RiseIn>
-
-          <div className="border-b border-[color:var(--color-line-hair)]">
-            <RiseIn delay={0.05}>
-              <IndexRow
-                number="01"
-                title="Snelle, betrouwbare bouwstraat"
-                href="/werkwijze#pijler-1"
-              />
-            </RiseIn>
-            <RiseIn delay={0.12}>
-              <IndexRow
-                number="02"
-                title="Diepe software-kennis"
-                href="/werkwijze#pijler-2"
-              />
-            </RiseIn>
-            <RiseIn delay={0.19}>
-              <IndexRow
-                number="03"
-                title="Builders met product- en strategiegevoel"
-                href="/werkwijze#pijler-3"
-              />
-            </RiseIn>
-          </div>
-
-          <div className="mt-10">
-            <Button
-              href="/werkwijze"
-              variant="ghost"
-              size="md"
-              endIcon={<ArrowRight size={14} strokeWidth={1.6} />}
-            >
-              Bekijk onze werkwijze
-            </Button>
-          </div>
-        </Container>
-      </section>
-
-      {/* ============== CONTACT CTA ============== */}
-      <div className="border-t border-[color:var(--color-line-hair)]">
-        <CTABlock
-          eyebrow="005 — CONTACT"
-          title={<>Benieuwd wat wij voor jouw bedrijf kunnen bouwen?</>}
-          description="Plan een kennismaking van 30 minuten. Geen verkooppraat — we kijken of het klikt en of er iets zinnigs te bouwen valt."
-          primary={{ label: 'Plan een kennismaking', href: INTAKE_HREF }}
-        />
-      </div>
+      {/* ============== CONTACT CTA — no border wrapper ============== */}
+      <CTABlock
+        eyebrow="CONTACT"
+        title={<>Benieuwd wat wij voor jouw bedrijf kunnen bouwen?</>}
+        description="Plan een kennismaking van 30 minuten. Geen verkooppraat — we kijken of het klikt en of er iets zinnigs te bouwen valt."
+        primary={{ label: 'Plan een kennismaking', href: INTAKE_HREF }}
+      />
     </>
   );
 }
