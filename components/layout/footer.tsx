@@ -5,42 +5,48 @@ const NAV = [
   { href: '/', label: 'Home' },
   { href: '/belofte', label: 'Belofte' },
   { href: '/werkwijze', label: 'Werkwijze' },
+  { href: '/werk', label: 'Werk' },
 ] as const;
 
 export function Footer() {
   const year = new Date().getFullYear();
   return (
-    <footer className="pt-16 pb-10 mt-20 border-t border-[color:var(--color-line-hair)]">
+    <footer className="mt-20">
       <Container>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
-          <p className="font-sans text-[14px] leading-[1.6] text-ink max-w-[320px]">
-            <span className="font-medium">Oktobus</span> — maatwerk software voor het MKB.
-          </p>
-
-          <nav
-            aria-label="Footer-navigatie"
-            className="flex flex-wrap items-center gap-x-6 gap-y-3 md:justify-center font-mono text-[12px] tracking-[0.08em] text-ink-2"
-          >
-            {NAV.map((link, i) => (
-              <span key={link.href} className="inline-flex items-center gap-x-6">
-                <Link href={link.href} className="hover:text-ink transition-colors">
-                  {link.label}
-                </Link>
-                {i < NAV.length - 1 ? <span aria-hidden>·</span> : null}
-              </span>
+        <div className="footer-grid">
+          <div>
+            <div className="footer-head">Oktobus.</div>
+            <p className="footer-sub">
+              Maatwerk software voor het MKB — met AI als bouwsteen, niet als feature.
+            </p>
+          </div>
+          <div className="footer-col">
+            <h4>→ Navigatie</h4>
+            {NAV.map((n) => (
+              <Link key={n.href} href={n.href}>
+                {n.label}
+              </Link>
             ))}
-          </nav>
-
-          <a
-            href="mailto:contact@oktobus.com"
-            className="font-mono text-[12px] tracking-[0.08em] text-ink-2 hover:text-ink transition-colors md:justify-self-end"
-          >
-            contact@oktobus.com
-          </a>
+          </div>
+          <div className="footer-col">
+            <h4>→ Contact</h4>
+            <a href="mailto:contact@oktobus.com">contact@oktobus.com</a>
+            <Link href="/contact">Plan kennismaking</Link>
+            <span className="block font-sans text-[14px] text-ink py-1">Amsterdam, NL</span>
+          </div>
+          <div className="footer-col">
+            <h4>→ Capaciteit</h4>
+            <div className="font-mono text-[13px] leading-[1.9] text-ink">
+              <div className="flex items-center gap-2">
+                <span className="focus-dot breathe" /> Q3 &rsquo;26 boekbaar
+              </div>
+              <div className="text-ink-2">2 projecten / kwartaal</div>
+            </div>
+          </div>
         </div>
-
-        <div className="mt-12 pt-6 border-t border-[color:var(--color-line-hair)] font-mono text-[11px] tracking-[0.08em] text-ink-2">
-          © {year} Oktobus
+        <div className="footer-bottom">
+          <span>© {year} Oktobus</span>
+          <span>OKTOBUS · STUDIO · LIVE</span>
         </div>
       </Container>
     </footer>

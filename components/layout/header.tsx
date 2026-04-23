@@ -5,20 +5,18 @@ import { useEffect, useState } from 'react';
 import { ArrowRight, Menu, X } from 'lucide-react';
 import { Container } from './container';
 import { LogoTile } from '@/components/marks/logo-tile';
-import { Button } from '@/components/ui/button';
 import { Num } from '@/components/ui/num';
 import { cn } from '@/lib/cn';
 
-type NavLink = { href: string; label: string; external?: boolean };
+type NavLink = { href: string; label: string };
 
 const NAV_LINKS: ReadonlyArray<NavLink> = [
   { href: '/', label: 'Home' },
   { href: '/belofte', label: 'Belofte' },
   { href: '/werkwijze', label: 'Werkwijze' },
-  { href: 'mailto:contact@oktobus.com', label: 'Contact', external: true },
+  { href: '/werk', label: 'Werk' },
+  { href: '/contact', label: 'Contact' },
 ];
-
-const INTAKE_HREF = 'mailto:contact@oktobus.com?subject=Kennismaking%20Oktobus';
 
 export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -40,23 +38,20 @@ export function Header() {
         </Link>
 
         {/* Desktop nav */}
-        <nav className="hidden lg:flex items-center gap-10 text-[13.5px]">
-          {NAV_LINKS.map((link) =>
-            link.external ? (
-              <a key={link.href} href={link.href} className="navlink">
-                {link.label}
-              </a>
-            ) : (
-              <Link key={link.href} href={link.href} className="navlink">
-                {link.label}
-              </Link>
-            ),
-          )}
-          <span aria-hidden className="text-ink-2">·</span>
+        <nav className="hidden lg:flex items-center gap-9 text-[13.5px]">
+          {NAV_LINKS.map((link) => (
+            <Link key={link.href} href={link.href} className="navlink">
+              {link.label}
+            </Link>
+          ))}
           <Num className="select-none">NL · EN</Num>
-          <Button href={INTAKE_HREF} size="sm">
+          <Link
+            href="/contact"
+            className="btn-primary inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-[13px]"
+          >
             Plan een kennismaking
-          </Button>
+            <ArrowRight size={12} strokeWidth={1.8} />
+          </Link>
         </nav>
 
         {/* Mobile trigger */}
@@ -84,38 +79,26 @@ export function Header() {
         )}
       >
         <Container className="pt-10 pb-20 flex flex-col gap-6">
-          {NAV_LINKS.map((link) => {
-            const className = 'text-[28px] font-medium tracking-[-0.02em] text-ink';
-            return link.external ? (
-              <a
-                key={link.href}
-                href={link.href}
-                className={className}
-                onClick={() => setMobileOpen(false)}
-              >
-                {link.label}
-              </a>
-            ) : (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={className}
-                onClick={() => setMobileOpen(false)}
-              >
-                {link.label}
-              </Link>
-            );
-          })}
+          {NAV_LINKS.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className="text-[28px] font-medium tracking-[-0.02em] text-ink"
+              onClick={() => setMobileOpen(false)}
+            >
+              {link.label}
+            </Link>
+          ))}
           <div className="hairline mt-2" />
           <Num className="select-none">NL · EN</Num>
-          <Button
-            href={INTAKE_HREF}
-            size="lg"
-            className="self-start mt-4"
-            endIcon={<ArrowRight size={14} strokeWidth={1.6} />}
+          <Link
+            href="/contact"
+            onClick={() => setMobileOpen(false)}
+            className="btn-primary inline-flex items-center justify-between gap-2 px-5 py-3.5 rounded-full text-[13.5px] self-start mt-4 min-w-[240px]"
           >
             Plan een kennismaking
-          </Button>
+            <ArrowRight size={14} strokeWidth={1.6} />
+          </Link>
         </Container>
       </div>
     </header>

@@ -1,254 +1,374 @@
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, ArrowUpRight } from 'lucide-react';
 import { Container } from '@/components/layout/container';
-import { Display } from '@/components/ui/display';
-import { Body } from '@/components/ui/body';
-import { Eyebrow } from '@/components/ui/eyebrow';
 import { Hairline } from '@/components/ui/hairline';
 import { Num } from '@/components/ui/num';
 import { Button } from '@/components/ui/button';
 import { OctopusLogo } from '@/components/marks/octopus-logo';
 import { RiseIn } from '@/components/motion/rise-in';
 import { FadeIn } from '@/components/motion/fade-in';
-import { TeaserRow } from '@/components/sections/teaser-row';
-import { PillarBento } from '@/components/sections/pillar-bento';
-import { StatStrip } from '@/components/sections/stat-strip';
+import { CapacityStrip } from '@/components/sections/capacity-strip';
 import { InkDrawDivider } from '@/components/sections/ink-draw-divider';
-import { CTABlock } from '@/components/sections/cta-block';
+import { TeamCard } from '@/components/sections/team-card';
+import { Marquee } from '@/components/sections/marquee';
+import { Pullquote } from '@/components/sections/pullquote';
 
-const INTAKE_HREF = 'mailto:contact@oktobus.com?subject=Kennismaking%20Oktobus';
+const INTAKE_HREF = '/contact';
 
 export default function HomePage() {
   return (
     <>
-      {/* ============== HERO ============== */}
+      {/* ============================ HERO ============================ */}
       <section>
-        <Container className="pt-20 pb-20 sm:pt-32 sm:pb-28">
-          {/* Index marker — only hairline in this block */}
+        <Container className="pt-20 sm:pt-24 pb-24 sm:pb-32">
+          {/* Index marker */}
           <RiseIn>
             <div className="flex items-center gap-4 mb-12 sm:mb-16">
-              <Eyebrow>001 — INDEX</Eyebrow>
+              <Num>§ 001 — INDEX</Num>
               <Hairline className="flex-1" />
               <Num>AMSTERDAM · EST. 2026</Num>
             </div>
           </RiseIn>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
-            {/* Headline */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12">
             <div className="lg:col-span-9">
-              <h1 className="font-sans font-medium text-ink text-[clamp(44px,9vw,104px)] leading-[1.02] tracking-[-0.045em]">
+              <h1 className="display text-[clamp(48px,9vw,112px)] leading-[1.02] tracking-[-0.05em] m-0">
                 <RiseIn delay={0.05}>
-                  <span className="block">
-                    Software die past{' '}
-                    <span
-                      className="inline-block align-middle mx-1 w-[clamp(34px,4.5vw,56px)] h-[clamp(34px,4.5vw,56px)] rounded-[4px] bg-teal"
-                      aria-hidden
-                    >
-                      <OctopusLogo size={56} className="w-full h-full" />
-                    </span>
-                  </span>
+                  <span className="block">Software die past</span>
                 </RiseIn>
                 <RiseIn delay={0.18}>
                   <span className="block">
-                    bij hoe jouw <span className="text-teal-ink">bedrijf</span> werkt.
+                    bij hoe{' '}
+                    <span
+                      className="inline-block align-middle mx-1 w-[clamp(48px,6vw,76px)] h-[clamp(48px,6vw,76px)] rounded-[6px] bg-teal"
+                      aria-hidden
+                    >
+                      <OctopusLogo size={76} className="w-full h-full" />
+                    </span>{' '}
+                    jouw
+                  </span>
+                </RiseIn>
+                <RiseIn delay={0.32}>
+                  <span className="block">
+                    bedrijf <span className="text-teal-ink">werkt</span>.
                   </span>
                 </RiseIn>
               </h1>
             </div>
 
-            {/* Meta column — second hairline (intentional) */}
+            {/* Meta column */}
             <div className="lg:col-span-3 lg:pt-4">
               <FadeIn delay={0.45}>
                 <Num>→ 001 / STUDIO</Num>
-                <Body muted={false} className="mt-3 max-w-[260px]">
-                  Oktobus is een klein team van drie. Product, design en engineering in één.
-                </Body>
+                <p className="text-[14px] leading-[1.65] mt-3 max-w-[260px]">
+                  Oktobus is een klein team van drie. Product, design en engineering in één. Geen
+                  tussenlagen, geen accountmanagers — je werkt direct met de mensen die bouwen.
+                </p>
                 <Hairline className="my-6" />
                 <Num>→ 002 / BELOFTE</Num>
-                <Body muted={false} className="mt-3 max-w-[260px]">
-                  Geen tussenlagen, geen accountmanagers — je werkt direct met de mensen die bouwen.
-                </Body>
-                <div className="mt-8">
+                <p className="text-[14px] leading-[1.65] mt-3 max-w-[260px]">
+                  Wij bouwen maatwerk software voor het MKB — met AI als bouwsteen, niet als feature.
+                  Sneller dan een traditioneel bureau. Slimmer dan de zoveelste abonnement-tool.
+                </p>
+                <div className="mt-8 flex flex-col gap-3 items-stretch">
                   <Button
                     href={INTAKE_HREF}
                     size="lg"
-                    className="justify-between w-full"
+                    className="justify-between min-w-[240px]"
                     endIcon={<ArrowRight size={14} strokeWidth={1.6} />}
                   >
                     Plan een kennismaking
+                  </Button>
+                  <Button
+                    href="/werk"
+                    variant="ghost"
+                    size="lg"
+                    className="justify-between min-w-[240px]"
+                    endIcon={<ArrowUpRight size={14} strokeWidth={1.6} />}
+                  >
+                    Recent werk (3)
                   </Button>
                 </div>
               </FadeIn>
             </div>
           </div>
 
-          {/* Subline — three lines, one per sentence */}
-          <div className="mt-12 sm:mt-16 max-w-[820px]">
-            <RiseIn delay={0.32} amount="small">
-              <p className="text-[18px] sm:text-[22px] leading-[1.45] tracking-[-0.015em] text-ink">
-                Wij bouwen maatwerk software voor het MKB — met AI als bouwsteen, niet als feature.
-              </p>
-            </RiseIn>
-            <RiseIn delay={0.42} amount="small">
-              <p className="text-[18px] sm:text-[22px] leading-[1.45] tracking-[-0.015em] text-ink-2 mt-2">
-                Sneller dan een traditioneel bureau.
-              </p>
-            </RiseIn>
-            <RiseIn delay={0.52} amount="small">
-              <p className="text-[18px] sm:text-[22px] leading-[1.45] tracking-[-0.015em] text-ink-2">
-                Slimmer dan de zoveelste abonnement-tool.
-              </p>
-            </RiseIn>
-          </div>
+          {/* Capacity strip */}
+          <FadeIn delay={0.7}>
+            <div className="mt-20 sm:mt-24">
+              <CapacityStrip
+                cells={[
+                  { label: '→ Capaciteit', value: '2', sub: 'projecten / kwartaal' },
+                  { label: '→ Tijd tot live', value: '6–12', sub: 'weken' },
+                  { label: '→ Overdracht', value: '100%', sub: 'eigen code' },
+                  { label: '→ Volgend slot', value: 'Q3 ’26', pulse: true },
+                ]}
+              />
+            </div>
+          </FadeIn>
         </Container>
 
         {/* InkDraw signature */}
-        <Container className="pb-10 sm:pb-14">
+        <Container className="pb-3">
           <InkDrawDivider />
         </Container>
       </section>
 
-      {/* ============== WIE WE ZIJN — borderless, rhythm via spacing ============== */}
+      {/* ============================ WIE WE ZIJN ============================ */}
       <section>
-        <Container className="py-24 sm:py-32">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
-            <div className="lg:col-span-9">
+        <Container className="py-20 sm:py-28">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
+            <div className="lg:col-span-3">
               <RiseIn>
-                <Display size="md" as="p">
-                  Oktobus is een klein team van drie. Product, design en engineering in één.
-                </Display>
+                <Num className="block mb-3.5">§ 002 — STUDIO</Num>
+                <span className="font-mono text-[11px] tracking-[0.12em] text-ink-2">
+                  → Amsterdam · drie
+                </span>
               </RiseIn>
             </div>
-            <div className="lg:col-span-3 lg:pt-3">
-              <FadeIn delay={0.15}>
-                <Body className="max-w-[280px]">
+            <div className="lg:col-span-9">
+              <RiseIn delay={0.1}>
+                <h2 className="display text-[clamp(36px,5.5vw,72px)] leading-[1.05] tracking-[-0.04em] m-0 max-w-[1000px]">
+                  Oktobus is een klein team van drie.
+                  <br />
+                  <span className="text-ink-2">
+                    Product, design en engineering in één.
+                  </span>{' '}
                   Geen tussenlagen, geen accountmanagers — je werkt direct met de mensen die bouwen.
-                </Body>
-              </FadeIn>
+                </h2>
+              </RiseIn>
+
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-12 sm:mt-16">
+                <RiseIn delay={0.15}>
+                  <TeamCard number="01" role="Product" name="Jochem" discipline="Product & strategie" />
+                </RiseIn>
+                <RiseIn delay={0.22}>
+                  <TeamCard number="02" role="Design" name="David" discipline="Design & interface" />
+                </RiseIn>
+                <RiseIn delay={0.29}>
+                  <TeamCard number="03" role="Engineering" name="Max" discipline="Engineering & AI" />
+                </RiseIn>
+              </div>
             </div>
           </div>
         </Container>
       </section>
 
-      {/* ============== DRIE PIJLERS — bento composition ============== */}
-      <section>
-        <Container className="py-20 sm:py-28">
-          <RiseIn>
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 mb-12 sm:mb-16">
-              <div className="lg:col-span-7">
-                <Num>WERKWIJZE</Num>
-                <Display size="md" as="h2" className="mt-4 max-w-[640px]">
-                  Hoe we bouwen
-                </Display>
-              </div>
-              <div className="lg:col-span-5 lg:pt-3">
-                <Body className="max-w-[420px]">
-                  Snelheid zonder kwaliteitsverlies komt uit drie dingen die we goed hebben geregeld.
-                  Géén toeval, géén held-werk.
-                </Body>
-              </div>
-            </div>
-          </RiseIn>
-
-          <RiseIn delay={0.1}>
-            <PillarBento
-              cards={[
-                {
-                  number: '01',
-                  title: 'Snelle, betrouwbare bouwstraat',
-                  description:
-                    'Herbruikbare bouwstenen voor wat in elk project terugkomt — inlog, rechten, koppelingen, AI-integraties. Ingebouwde checks die bij elke wijziging draaien. We starten niet bij nul.',
-                  tags: ['AUTH', 'CI/CD', 'OBSERVABILITY', 'EVALS'],
-                  href: '/werkwijze#pijler-1',
-                },
-                {
-                  number: '02',
-                  title: 'Diepe software-kennis',
-                  description:
-                    'We weten wat onder de motorkap zit. Welke database, welk LLM-pad, waar wel en niet een shortcut. Software die over twee jaar nog mee kan.',
-                  href: '/werkwijze#pijler-2',
-                },
-                {
-                  number: '03',
-                  title: 'Builders met product- en strategiegevoel',
-                  description:
-                    'Geen developers die wachten op een spec. We denken mee over wat je écht nodig hebt en hoe het past bij je ICT-landschap.',
-                  href: '/werkwijze#pijler-3',
-                },
-              ]}
-            />
-          </RiseIn>
-        </Container>
-      </section>
-
-      {/* ============== TRUST-ANCHOR STAT STRIP ============== */}
-      <StatStrip
-        eyebrow="WAT JE KRIJGT"
-        stats={[
-          { label: '→ TIJD TOT LIVE', value: '6–12', sub: 'weken' },
-          { label: '→ EIGEN CODE', value: '100%', sub: 'overdracht inbegrepen' },
-          { label: '→ INGEBOUWD', value: 'tests · evals', sub: 'vanaf dag één' },
-          { label: '→ VOLGEND SLOT', value: 'Q3 ’26', pulse: true },
+      {/* ============================ MARQUEE ============================ */}
+      <Marquee
+        items={[
+          'Maatwerk boven abonnement',
+          'Production-ready, geen demo',
+          'AI als bouwsteen',
+          'MKB-budget, geen bureauprijs',
+          'Geen tussenlagen',
+          'Weken, geen maanden',
         ]}
       />
 
-      {/* ============== BELOFTE TEASER — borderless rows ============== */}
+      {/* ============================ BELOFTE TEASER ============================ */}
       <section>
-        <Container className="py-20 sm:py-28">
-          <RiseIn>
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 mb-12 sm:mb-14">
-              <div className="lg:col-span-7">
-                <Num>BELOFTE</Num>
-                <Display size="md" as="h2" className="mt-4 max-w-[640px]">
-                  Wat je van ons mag verwachten
-                </Display>
-              </div>
-            </div>
-          </RiseIn>
-
-          <div className="divide-y divide-[color:var(--color-line-soft)]">
-            <RiseIn delay={0.05}>
-              <TeaserRow
-                number="01"
-                title="Maatwerk, geen compromissen"
-                description="Software die past op jouw proces, niet andersom."
-              />
+        <Container className="py-24 sm:py-32">
+          <div className="flex justify-between items-end mb-12 sm:mb-16 flex-wrap gap-6">
+            <RiseIn>
+              <Num className="block mb-3.5">§ 003 — BELOFTE</Num>
+              <h2 className="display text-[clamp(40px,5.5vw,64px)] leading-[1.02] tracking-[-0.04em] m-0 max-w-[760px]">
+                Wat je van ons<br />mag verwachten.
+              </h2>
             </RiseIn>
-            <RiseIn delay={0.12}>
-              <TeaserRow
-                number="02"
-                title="MKB-budget, geen bureau-prijs"
-                description="Wat bij een traditioneel bureau €200k en zes maanden kost, leveren wij in weken tegen een fractie."
-              />
-            </RiseIn>
-            <RiseIn delay={0.19}>
-              <TeaserRow
-                number="03"
-                title="Werkende software, geen prototype met plakband"
-                description="Alles wat we opleveren is production-ready. Vanaf dag één."
-              />
+            <RiseIn delay={0.1}>
+              <a href="/belofte" className="navlink text-[15px] pb-1.5">
+                Lees meer over onze belofte →
+              </a>
             </RiseIn>
           </div>
 
-          <div className="mt-10">
-            <Button
-              href="/belofte"
-              variant="ghost"
-              size="md"
-              endIcon={<ArrowRight size={14} strokeWidth={1.6} />}
-            >
-              Lees meer over onze belofte
-            </Button>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <RiseIn delay={0.05}>
+              <article className="pillar h-full">
+                <div className="flex justify-between items-start">
+                  <span className="pnum">01</span>
+                  <span className="picon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                      <rect x="4" y="4" width="16" height="16" stroke="#0B0B0A" strokeWidth="1.2" />
+                      <rect x="9" y="9" width="6" height="6" fill="#51A397" />
+                    </svg>
+                  </span>
+                </div>
+                <h3 className="ptitle">Maatwerk, geen compromissen</h3>
+                <p className="text-[14.5px] leading-[1.65] text-ink-2 mt-3.5">
+                  Software die past op jouw proces, niet andersom.
+                </p>
+              </article>
+            </RiseIn>
+            <RiseIn delay={0.12}>
+              <article className="pillar h-full">
+                <div className="flex justify-between items-start">
+                  <span className="pnum">02</span>
+                  <span className="picon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                      <path d="M4 18L10 8l4 6 6-10" stroke="#0B0B0A" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+                      <circle cx="14" cy="14" r="2" fill="#51A397" />
+                    </svg>
+                  </span>
+                </div>
+                <h3 className="ptitle">MKB-budget, geen bureau-prijs</h3>
+                <p className="text-[14.5px] leading-[1.65] text-ink-2 mt-3.5">
+                  Wat bij een traditioneel bureau €200k en zes maanden kost, leveren wij in weken
+                  tegen een fractie.
+                </p>
+              </article>
+            </RiseIn>
+            <RiseIn delay={0.19}>
+              <article className="pillar h-full">
+                <div className="flex justify-between items-start">
+                  <span className="pnum">03</span>
+                  <span className="picon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                      <circle cx="12" cy="12" r="9" stroke="#0B0B0A" strokeWidth="1.2" />
+                      <path d="M8 12l3 3 5-6" stroke="#51A397" strokeWidth="1.8" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </span>
+                </div>
+                <h3 className="ptitle">Werkende software, geen prototype met plakband</h3>
+                <p className="text-[14.5px] leading-[1.65] text-ink-2 mt-3.5">
+                  Alles wat we opleveren is production-ready. Vanaf dag één.
+                </p>
+              </article>
+            </RiseIn>
           </div>
         </Container>
       </section>
 
-      {/* ============== CONTACT CTA — no border wrapper ============== */}
-      <CTABlock
-        eyebrow="CONTACT"
-        title={<>Benieuwd wat wij voor jouw bedrijf kunnen bouwen?</>}
-        description="Plan een kennismaking van 30 minuten. Geen verkooppraat — we kijken of het klikt en of er iets zinnigs te bouwen valt."
-        primary={{ label: 'Plan een kennismaking', href: INTAKE_HREF }}
-      />
+      {/* ============================ WERKWIJZE TEASER (bone-2) ============================ */}
+      <section className="bg-bone-2">
+        <Container className="py-24 sm:py-32">
+          <div className="flex justify-between items-end mb-12 sm:mb-16 flex-wrap gap-6">
+            <RiseIn>
+              <Num className="block mb-3.5">§ 004 — WERKWIJZE</Num>
+              <h2 className="display text-[clamp(40px,5.5vw,64px)] leading-[1.02] tracking-[-0.04em] m-0 max-w-[800px]">
+                Hoe we bouwen.
+              </h2>
+            </RiseIn>
+            <RiseIn delay={0.1}>
+              <a href="/werkwijze" className="navlink text-[15px] pb-1.5">
+                Bekijk onze werkwijze →
+              </a>
+            </RiseIn>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <RiseIn delay={0.05}>
+              <article className="pillar h-full">
+                <div className="flex justify-between items-start">
+                  <span className="pnum">01</span>
+                  <span className="picon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                      <rect x="3" y="10" width="5" height="5" stroke="#0B0B0A" strokeWidth="1.2" />
+                      <rect x="10" y="10" width="5" height="5" stroke="#0B0B0A" strokeWidth="1.2" />
+                      <rect x="17" y="10" width="4" height="5" fill="#51A397" />
+                      <path d="M3 6h18" stroke="#0B0B0A" strokeWidth="1.2" />
+                    </svg>
+                  </span>
+                </div>
+                <h3 className="ptitle">We starten niet bij nul</h3>
+                <p className="text-[14.5px] leading-[1.65] text-ink-2 mt-3.5">
+                  Herbruikbare bouwstenen en ingebouwde checks. Dus bouwen we bovenop een fundament,
+                  niet vanaf de grond.
+                </p>
+              </article>
+            </RiseIn>
+            <RiseIn delay={0.12}>
+              <article className="pillar h-full">
+                <div className="flex justify-between items-start">
+                  <span className="pnum">02</span>
+                  <span className="picon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                      <circle cx="12" cy="9" r="4" stroke="#0B0B0A" strokeWidth="1.2" />
+                      <path d="M7 20c0-3 2-5 5-5s5 2 5 5" stroke="#0B0B0A" strokeWidth="1.2" />
+                      <circle cx="12" cy="9" r="1.6" fill="#51A397" />
+                    </svg>
+                  </span>
+                </div>
+                <h3 className="ptitle">AI typt snel. Wij denken voor.</h3>
+                <p className="text-[14.5px] leading-[1.65] text-ink-2 mt-3.5">
+                  Jaren bouwervaring vóór AI bestond. Dat maakt het verschil tussen software die werkt
+                  op de demo en software die jaren meegaat.
+                </p>
+              </article>
+            </RiseIn>
+            <RiseIn delay={0.19}>
+              <article className="pillar h-full">
+                <div className="flex justify-between items-start">
+                  <span className="pnum">03</span>
+                  <span className="picon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                      <path d="M4 7h16M4 12h16M4 17h10" stroke="#0B0B0A" strokeWidth="1.2" />
+                      <circle cx="18" cy="17" r="2" fill="#51A397" />
+                    </svg>
+                  </span>
+                </div>
+                <h3 className="ptitle">Geen tussenlagen, geen vertaalverlies</h3>
+                <p className="text-[14.5px] leading-[1.65] text-ink-2 mt-3.5">
+                  Product, techniek en strategie in dezelfde hoofden. We bouwen het juiste, niet zomaar
+                  iets.
+                </p>
+              </article>
+            </RiseIn>
+          </div>
+        </Container>
+      </section>
+
+      {/* ============================ PULLQUOTE ============================ */}
+      <Pullquote attribution="Werkwijze · pijler 02">
+        AI typt snel. Wij denken voor. Dat verschil merk je niet op dag 1 — dat merk je als je systeem
+        drie jaar later nog net zo soepel draait.
+      </Pullquote>
+
+      {/* ============================ CONTACT CTA (dark) ============================ */}
+      <section className="bg-ink text-bone">
+        <Container className="py-28 sm:py-36">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-end">
+            <div className="lg:col-span-6">
+              <RiseIn>
+                <span className="font-mono text-[10.5px] tracking-[0.08em] mb-4 block" style={{ color: '#F3EFE966' }}>
+                  § 006 — KENNISMAKING
+                </span>
+                <h2 className="display text-[clamp(48px,7vw,88px)] leading-[1.02] tracking-[-0.045em] m-0 text-bone">
+                  Benieuwd wat wij<br />voor jouw bedrijf<br />
+                  <span className="text-teal">kunnen bouwen?</span>
+                </h2>
+              </RiseIn>
+            </div>
+            <div className="lg:col-span-6 lg:pb-3">
+              <RiseIn delay={0.1}>
+                <p
+                  className="text-[20px] leading-[1.5] tracking-[-0.01em] max-w-[460px]"
+                  style={{ color: '#F3EFE9CC' }}
+                >
+                  Plan een kennismaking van 30 minuten. Geen verkooppraat — we kijken of het klikt en
+                  of er iets zinnigs te bouwen valt.
+                </p>
+                <div className="mt-10 flex items-center gap-4 flex-wrap">
+                  <a
+                    href={INTAKE_HREF}
+                    className="inline-flex items-center gap-2 px-7 py-4 rounded-full text-[15px] font-medium"
+                    style={{ background: 'var(--color-teal)', color: 'var(--color-ink)' }}
+                  >
+                    Plan een kennismaking
+                    <ArrowRight size={14} strokeWidth={1.8} />
+                  </a>
+                  <span
+                    className="font-mono text-[11px] tracking-[0.1em]"
+                    style={{ color: '#F3EFE966' }}
+                  >
+                    → Volgend slot · Q3 &rsquo;26
+                  </span>
+                </div>
+              </RiseIn>
+            </div>
+          </div>
+        </Container>
+      </section>
     </>
   );
 }

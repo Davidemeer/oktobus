@@ -1,35 +1,38 @@
 @import "tailwindcss";
 
 /* =========================================================================
- * Design tokens — single source of truth.
- * See DESIGN.md §2 for the full specification. Use Tailwind utilities
- * generated from these tokens (bg-bone, text-ink-2, text-teal-ink, etc).
+ * Design tokens (DESIGN.md §2 + extensions for Direction C v2)
  * ========================================================================= */
 
 @theme {
   /* Base surfaces */
   --color-bone: #f3efe9;
   --color-bone-2: #e9e4db;
+  --color-bone-3: #ddd6c8;
   --color-paper: #fbf9f5;
 
   /* Text & outline */
   --color-ink: #0b0b0a;
   --color-ink-2: #63615c;
 
-  /* Accent — use sparingly, max one per viewport */
+  /* Accent */
   --color-teal: #51a397;
   --color-teal-ink: #2f6e66;
+  --color-teal-soft: #c9e1dc;
+
+  /* Warn — used very sparingly (e.g. "vertaalslagen lekken") */
+  --color-warn: #c2623a;
 
   /* Hairlines */
   --color-line: rgb(11 11 10 / 0.1);
   --color-line-soft: rgb(11 11 10 / 0.07);
   --color-line-hair: rgb(11 11 10 / 0.12);
 
-  /* Font stacks — wired to next/font variables from app/layout.tsx */
+  /* Font stacks */
   --font-sans: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, "SF Mono", Menlo, monospace;
 
-  /* Display type scale (see DESIGN.md §2.3) */
+  /* Display type scale */
   --text-hero: 7rem;
   --text-hero--line-height: 1.02;
   --text-hero--letter-spacing: -0.05em;
@@ -97,106 +100,60 @@ body {
 }
 
 /* =========================================================================
- * Keyframes (see DESIGN.md §5)
- *   sway and breathe are continuous CSS loops.
- *   The rest are reference; page-level reveals use Motion's whileInView.
+ * Keyframes
  * ========================================================================= */
 
 @keyframes riseIn {
-  from {
-    opacity: 0;
-    transform: translateY(12px);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: none; }
 }
-
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
-
 @keyframes wipeRight {
-  from {
-    clip-path: inset(0 100% 0 0);
-  }
-  to {
-    clip-path: inset(0 0 0 0);
-  }
+  from { clip-path: inset(0 100% 0 0); }
+  to   { clip-path: inset(0 0 0 0); }
 }
-
 @keyframes tentacleSway {
-  0%,
-  100% {
-    transform: translateY(0) rotate(0);
-  }
-  50% {
-    transform: translateY(-2px) rotate(0.6deg);
-  }
+  0%, 100% { transform: translateY(0) rotate(0); }
+  50%      { transform: translateY(-2px) rotate(0.6deg); }
 }
-
 @keyframes breathe {
-  0%,
-  100% {
-    opacity: 0.35;
-  }
-  50% {
-    opacity: 1;
-  }
+  0%, 100% { opacity: 0.35; }
+  50%      { opacity: 1; }
 }
-
 @keyframes markerDot {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-3px);
-  }
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-3px); }
 }
-
 @keyframes inkDraw {
-  from {
-    stroke-dashoffset: 260;
-  }
-  to {
-    stroke-dashoffset: 0;
-  }
+  from { stroke-dashoffset: 260; }
+  to   { stroke-dashoffset: 0; }
+}
+@keyframes marqueeScroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
 }
 
 .sway {
   animation: tentacleSway 6s ease-in-out infinite;
   transform-origin: center;
 }
-
 .breathe {
   animation: breathe 3s ease-in-out infinite;
 }
-
 .ink-draw {
   stroke-dasharray: 260;
   animation: inkDraw 2.2s cubic-bezier(0.5, 0, 0.3, 1) forwards 0.6s;
 }
 
 /* =========================================================================
- * Component classes (see DESIGN.md §6)
+ * Primitives
  * ========================================================================= */
 
-.hairline {
-  height: 1px;
-  background: var(--color-line);
-}
-
-.vrule {
-  width: 1px;
-  background: var(--color-line);
-}
+.hairline { height: 1px; background: var(--color-line); }
+.vrule    { width: 1px;  background: var(--color-line); }
 
 .num {
   font-family: var(--font-mono);
@@ -204,7 +161,6 @@ body {
   letter-spacing: 0.08em;
   color: var(--color-ink-2);
 }
-
 .eyebrow {
   font-family: var(--font-mono);
   font-size: 0.688rem;
@@ -212,43 +168,66 @@ body {
   text-transform: uppercase;
   color: var(--color-ink-2);
 }
-
-.navlink {
-  position: relative;
-  color: var(--color-ink);
+.display {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  letter-spacing: -0.045em;
 }
+
+/* =========================================================================
+ * Nav + Buttons
+ * ========================================================================= */
+
+.navlink { position: relative; color: var(--color-ink); }
 .navlink::after {
   content: "";
   position: absolute;
-  left: 0;
-  right: 0;
-  bottom: -4px;
+  left: 0; right: 0; bottom: -4px;
   height: 1px;
   background: var(--color-ink);
   transform: scaleX(0);
   transform-origin: left;
   transition: transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
-.navlink:hover::after {
-  transform: scaleX(1);
-}
+.navlink:hover::after { transform: scaleX(1); }
 
 .btn-primary {
   background: var(--color-ink);
   color: var(--color-bone);
   transition: all 0.35s ease;
 }
-.btn-primary:hover {
-  background: var(--color-teal-ink);
-}
+.btn-primary:hover { background: var(--color-teal-ink); }
 
 .btn-ghost {
   border: 1px solid rgb(11 11 10 / 0.13);
   transition: all 0.35s ease;
 }
-.btn-ghost:hover {
-  border-color: var(--color-ink);
+.btn-ghost:hover { border-color: var(--color-ink); }
+
+/* =========================================================================
+ * Logo
+ * ========================================================================= */
+
+.logo-tile { display: inline-flex; align-items: center; gap: 10px; }
+.logo-sq {
+  width: 28px; height: 28px;
+  background: var(--color-teal);
+  border-radius: 2px;
+  display: grid; place-items: center;
+  transition: all 0.5s ease;
 }
+.logo-tile:hover .logo-sq { background: var(--color-ink); }
+.logo-tile:hover .logo-sq path { fill: var(--color-teal); }
+.wm {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  font-size: 15px;
+}
+
+/* =========================================================================
+ * Bento + Pillar cards
+ * ========================================================================= */
 
 .bento {
   border: 1px solid var(--color-line-soft);
@@ -256,14 +235,13 @@ body {
   border-radius: 2px;
   transition: all 0.5s ease;
 }
-.bento:hover {
-  border-color: var(--color-ink);
-}
+.bento:hover { border-color: var(--color-ink); }
 
 .pillar {
   background: var(--color-paper);
   border: 1px solid rgb(11 11 10 / 0.09);
   border-radius: 2px;
+  padding: 32px;
   transition: all 0.45s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 .pillar:hover {
@@ -287,93 +265,596 @@ body {
   margin-top: 40px;
 }
 .pillar .picon {
-  width: 44px;
-  height: 44px;
+  width: 44px; height: 44px;
   border-radius: 9999px;
   border: 1px solid rgb(11 11 10 / 0.13);
-  display: grid;
-  place-items: center;
+  display: grid; place-items: center;
   transition: border-color 0.4s ease;
 }
-.pillar:hover .picon {
-  border-color: var(--color-ink);
-}
+.pillar:hover .picon { border-color: var(--color-ink); }
 
-.row {
+/* =========================================================================
+ * Capacity strip (home, werk, contact)
+ * ========================================================================= */
+
+.capacity {
   display: grid;
-  grid-template-columns: 80px 1.1fr 2fr 120px 80px;
-  align-items: center;
-  gap: 24px;
-  padding: 28px 0;
-  border-top: 1px solid rgb(11 11 10 / 0.09);
-  transition:
-    background 0.3s ease,
-    padding-left 0.4s ease;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
 }
-.row:hover {
-  background: rgb(11 11 10 / 0.02);
-  padding-left: 16px;
+.cell {}
+.clabel {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--color-ink-2);
+  margin-bottom: 10px;
 }
-.row:hover .row-arrow {
-  opacity: 1;
-  transform: translateX(0);
-}
-.row-arrow {
-  opacity: 0;
-  transform: translateX(-8px);
-  transition: all 0.4s cubic-bezier(0.2, 0.7, 0.2, 1);
+.cval {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: 32px;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  color: var(--color-ink);
 }
 
 .focus-dot {
-  width: 6px;
-  height: 6px;
+  width: 6px; height: 6px;
   border-radius: 9999px;
   background: var(--color-teal);
   display: inline-block;
 }
-
-.logo-tile {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
+.focus-ring {
+  position: relative;
+  display: inline-block;
+  width: 14px; height: 14px;
+  flex-shrink: 0;
 }
-.logo-sq {
-  width: 28px;
-  height: 28px;
+.focus-ring::before {
+  content: '';
+  position: absolute; inset: 0;
+  border-radius: 9999px;
   background: var(--color-teal);
-  border-radius: 2px;
-  display: grid;
-  place-items: center;
-  transition: all 0.5s ease;
+  opacity: 0.25;
+  animation: breathe 3s ease-in-out infinite;
 }
-.logo-tile:hover .logo-sq {
-  background: var(--color-ink);
-}
-.logo-tile:hover .logo-sq path {
-  fill: var(--color-teal);
-}
-.wm {
-  font-family: var(--font-sans);
-  font-weight: 500;
-  letter-spacing: 0.02em;
-  font-size: 15px;
+.focus-ring::after {
+  content: '';
+  position: absolute; inset: 4px;
+  border-radius: 9999px;
+  background: var(--color-teal);
 }
 
 /* =========================================================================
- * Reduced motion (see DESIGN.md §5.5)
+ * Marquee scroll band
+ * ========================================================================= */
+
+.marquee {
+  overflow: hidden;
+  border-block: 1px solid var(--color-line);
+  background: var(--color-bone);
+  padding: 22px 0;
+}
+.marquee-track {
+  display: inline-flex;
+  white-space: nowrap;
+  align-items: center;
+  gap: 56px;
+  padding-left: 56px;
+  animation: marqueeScroll 40s linear infinite;
+  will-change: transform;
+}
+.marquee-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 56px;
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: 22px;
+  letter-spacing: -0.015em;
+  color: var(--color-ink);
+}
+.marquee-dot {
+  width: 6px; height: 6px;
+  border-radius: 9999px;
+  background: var(--color-teal);
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+/* =========================================================================
+ * Tag pills (belofte hero, contact form checkboxes)
+ * ========================================================================= */
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border: 1px solid var(--color-line);
+  background: var(--color-paper);
+  border-radius: 9999px;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-ink);
+  transition: all 0.3s ease;
+}
+.tag .dot {
+  width: 6px; height: 6px;
+  border-radius: 9999px;
+  background: var(--color-teal);
+}
+.tag-on {
+  background: var(--color-teal);
+  color: white;
+  border-color: var(--color-teal-ink);
+}
+.tag-on .dot { background: white; }
+
+/* =========================================================================
+ * Checklist (belofte voor wie)
+ * ========================================================================= */
+
+.checklist { list-style: none; padding: 0; margin: 0; }
+.checklist li {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+  padding: 32px 0;
+  border-bottom: 1px solid var(--color-line);
+}
+.checklist li:first-child { border-top: 1px solid var(--color-line); }
+.tick {
+  flex-shrink: 0;
+  width: 36px; height: 36px;
+  border-radius: 9999px;
+  background: var(--color-teal);
+  color: white;
+  display: grid; place-items: center;
+  margin-top: 4px;
+}
+
+/* =========================================================================
+ * Pullquote (home)
+ * ========================================================================= */
+
+.pullquote {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: clamp(28px, 4vw, 48px);
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+  color: var(--color-ink);
+  margin: 0;
+}
+.open-q {
+  color: var(--color-teal);
+  margin-right: 4px;
+}
+
+/* =========================================================================
+ * Bouwstenen grid (werkwijze pijler 01)
+ * ========================================================================= */
+
+.bs-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+.bs-brick {
+  border: 1px solid var(--color-line);
+  border-radius: 2px;
+  padding: 16px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  background: var(--color-paper);
+  transition: all 0.3s ease;
+  min-height: 78px;
+}
+.bs-brick.ready { background: var(--color-bone-3); }
+.bs-brick.custom {
+  border-color: var(--color-teal);
+  background: var(--color-paper);
+}
+.bs-brick.custom .bs-name { color: var(--color-teal-ink); }
+.bs-num {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  color: var(--color-ink-2);
+}
+.bs-name {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-ink);
+  line-height: 1.3;
+}
+
+/* =========================================================================
+ * TOC (werkwijze hero)
+ * ========================================================================= */
+
+.toc { border-top: 1px solid var(--color-line); }
+.toc-row {
+  display: grid;
+  grid-template-columns: 80px 1.4fr 1.6fr 100px 50px;
+  align-items: center;
+  gap: 24px;
+  padding: 28px 0;
+  border-bottom: 1px solid var(--color-line);
+  transition: background 0.3s ease, padding-left 0.4s ease;
+}
+.toc-row:hover {
+  background: rgba(11, 11, 10, 0.02);
+  padding-left: 16px;
+}
+.toc-row:hover .toc-arrow { opacity: 1; transform: translateX(0); }
+.toc-arrow {
+  opacity: 0;
+  transform: translateX(-8px);
+  transition: all 0.4s cubic-bezier(0.2, 0.7, 0.2, 1);
+  justify-self: end;
+}
+
+/* =========================================================================
+ * Timeline (werkwijze week 1-6)
+ * ========================================================================= */
+
+.timeline { position: relative; }
+.timeline-axis {
+  position: absolute;
+  left: 0; right: 0;
+  top: 18px;
+  height: 1px;
+  background: var(--color-line);
+}
+.timeline-row {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 20px;
+  position: relative;
+}
+.timeline-cell {
+  padding-top: 40px;
+  position: relative;
+}
+.timeline-cell::before {
+  content: '';
+  position: absolute;
+  top: 12px; left: 0;
+  width: 14px; height: 14px;
+  border-radius: 9999px;
+  background: var(--color-bone);
+  border: 1px solid var(--color-ink-2);
+}
+.timeline-cell.active::before {
+  background: var(--color-teal);
+  border-color: var(--color-teal);
+}
+.tw-num {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  color: var(--color-teal-ink);
+  display: block;
+  margin-bottom: 12px;
+}
+.tw-title {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: 18px;
+  letter-spacing: -0.025em;
+  color: var(--color-ink);
+  margin-bottom: 8px;
+  line-height: 1.2;
+}
+.tw-body {
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--color-ink-2);
+}
+
+/* =========================================================================
+ * Footnotes (belofte)
+ * ========================================================================= */
+
+.footnotes {
+  margin-top: 64px;
+  padding-top: 32px;
+  border-top: 1px solid var(--color-line);
+  display: grid;
+  gap: 12px;
+  max-width: 720px;
+}
+.footnote {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  line-height: 1.65;
+  color: var(--color-ink-2);
+}
+.footnote sup {
+  color: var(--color-teal-ink);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  margin-right: 6px;
+}
+
+/* =========================================================================
+ * Placeholder portrait stripe (home team)
+ * ========================================================================= */
+
+.ph-stripe {
+  background: repeating-linear-gradient(
+    135deg,
+    var(--color-bone-2),
+    var(--color-bone-2) 10px,
+    var(--color-paper) 10px,
+    var(--color-paper) 20px
+  );
+  border: 1px solid var(--color-line);
+  border-radius: 2px;
+  position: relative;
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  padding: 14px;
+}
+.ph-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--color-ink-2);
+}
+.ph-corner {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  color: var(--color-ink-2);
+  opacity: 0.6;
+}
+
+/* =========================================================================
+ * Cases (werk page)
+ * ========================================================================= */
+
+.case {
+  display: grid;
+  grid-template-columns: 1fr 4fr 4fr 1fr;
+  gap: 48px;
+  padding: 64px 0;
+  border-top: 1px solid var(--color-line);
+}
+.case:last-child { border-bottom: 1px solid var(--color-line); }
+.c-num {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: 56px;
+  letter-spacing: -0.04em;
+  color: var(--color-ink);
+  line-height: 1;
+}
+.c-kicker {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-ink-2);
+  margin-bottom: 14px;
+}
+.c-title {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: 36px;
+  letter-spacing: -0.035em;
+  line-height: 1.1;
+  color: var(--color-ink);
+  margin: 0;
+}
+.c-handnote {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--color-ink-2);
+  line-height: 1.65;
+  margin-top: 16px;
+  max-width: 380px;
+}
+.c-body {
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--color-ink);
+  margin: 0;
+}
+.c-meta {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--color-ink-2);
+  line-height: 1.9;
+}
+
+/* =========================================================================
+ * FAQ (contact)
+ * ========================================================================= */
+
+.faq-row { border-bottom: 1px solid var(--color-line); }
+.faq-row:first-of-type { border-top: 1px solid var(--color-line); }
+.faq-q {
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 28px 0;
+  gap: 24px;
+}
+.faq-q::-webkit-details-marker { display: none; }
+.qtitle {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: 22px;
+  letter-spacing: -0.025em;
+  color: var(--color-ink);
+}
+.faq-plus {
+  width: 16px; height: 16px;
+  position: relative;
+  flex-shrink: 0;
+}
+.faq-plus::before, .faq-plus::after {
+  content: '';
+  position: absolute;
+  background: var(--color-ink);
+  top: 50%; left: 0; right: 0;
+  height: 1px;
+  transform: translateY(-50%);
+}
+.faq-plus::after {
+  transform: translateY(-50%) rotate(90deg);
+  transition: transform 0.3s ease;
+}
+.faq-row[open] .faq-plus::after {
+  transform: translateY(-50%) rotate(0deg);
+}
+.faq-a {
+  padding-bottom: 28px;
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--color-ink-2);
+  max-width: 640px;
+}
+
+/* =========================================================================
+ * Form (contact intake)
+ * ========================================================================= */
+
+.form-field { margin-bottom: 22px; }
+.form-field label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  color: var(--color-ink-2);
+  margin-bottom: 10px;
+}
+.form-field input,
+.form-field textarea,
+.form-field select {
+  width: 100%;
+  padding: 14px 16px;
+  font-family: var(--font-sans);
+  font-size: 15px;
+  color: var(--color-ink);
+  background: var(--color-paper);
+  border: 1px solid var(--color-line);
+  border-radius: 2px;
+  transition: border-color 0.3s ease;
+}
+.form-field input:focus,
+.form-field textarea:focus,
+.form-field select:focus {
+  outline: none;
+  border-color: var(--color-ink);
+}
+.form-field input::placeholder,
+.form-field textarea::placeholder {
+  color: var(--color-ink-2);
+  opacity: 0.5;
+}
+
+/* =========================================================================
+ * Footer
+ * ========================================================================= */
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 48px;
+  padding: 60px 0 40px;
+  border-top: 1px solid var(--color-line);
+}
+.footer-head {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: 32px;
+  letter-spacing: -0.035em;
+  color: var(--color-ink);
+}
+.footer-sub {
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--color-ink-2);
+  margin-top: 12px;
+  max-width: 280px;
+}
+.footer-col h4 {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.12em;
+  color: var(--color-ink-2);
+  text-transform: uppercase;
+  margin-bottom: 18px;
+  font-weight: 400;
+}
+.footer-col a {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  color: var(--color-ink);
+  text-decoration: none;
+  padding: 4px 0;
+  transition: color 0.3s ease;
+}
+.footer-col a:hover { color: var(--color-teal-ink); }
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--color-ink-2);
+  padding: 24px 0;
+  border-top: 1px solid var(--color-line);
+}
+
+/* =========================================================================
+ * Responsive collapsing
+ * ========================================================================= */
+
+@media (max-width: 900px) {
+  .capacity { grid-template-columns: repeat(2, 1fr); gap: 28px; }
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+  .timeline-row { grid-template-columns: 1fr; }
+  .timeline-axis { display: none; }
+  .timeline-cell { padding-top: 16px; padding-left: 28px; padding-bottom: 8px; }
+  .timeline-cell::before { top: 18px; left: 0; }
+  .bs-grid { grid-template-columns: repeat(2, 1fr); }
+  .case { grid-template-columns: 1fr; gap: 20px; padding: 40px 0; }
+  .toc-row { grid-template-columns: 60px 1fr 40px; }
+  .toc-row > :nth-child(3),
+  .toc-row > :nth-child(4) { display: none; }
+}
+
+@media (max-width: 600px) {
+  .footer-grid { grid-template-columns: 1fr; }
+  .marquee-item { font-size: 18px; }
+}
+
+/* =========================================================================
+ * Reduced motion (DESIGN.md §5.5)
  * ========================================================================= */
 
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
+  *, *::before, *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
-  .sway,
-  .breathe,
-  .ink-draw {
+  .sway, .breathe, .ink-draw, .marquee-track {
     animation: none !important;
   }
+  .focus-ring::before { opacity: 0.4; }
 }
