@@ -15,10 +15,10 @@ const NAV_LINKS: ReadonlyArray<NavLink> = [
   { href: '/', label: 'Home' },
   { href: '/belofte', label: 'Belofte' },
   { href: '/werkwijze', label: 'Werkwijze' },
-  { href: 'mailto:hello@oktobus.com', label: 'Contact', external: true },
+  { href: 'mailto:contact@oktobus.com', label: 'Contact', external: true },
 ];
 
-const INTAKE_HREF = 'mailto:hello@oktobus.com?subject=Intake%20Oktobus';
+const INTAKE_HREF = 'mailto:contact@oktobus.com?subject=Kennismaking%20Oktobus';
 
 export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -55,7 +55,7 @@ export function Header() {
           <span aria-hidden className="text-ink-2">·</span>
           <Num className="select-none">NL · EN</Num>
           <Button href={INTAKE_HREF} size="sm">
-            Plan een intake
+            Plan een kennismaking
           </Button>
         </nav>
 
@@ -114,7 +114,7 @@ export function Header() {
             className="self-start mt-4"
             endIcon={<ArrowRight size={14} strokeWidth={1.6} />}
           >
-            Plan een intake
+            Plan een kennismaking
           </Button>
         </Container>
       </div>

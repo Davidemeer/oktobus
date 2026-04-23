@@ -12,14 +12,17 @@ type PageHeroProps = {
   eyebrow: string;
   title: ReactNode;
   sub: ReactNode;
+  /** "default" = body size · "lead" = 24px statement size for editorial intros */
+  subSize?: 'default' | 'lead';
   meta?: { label: string; value: string };
 };
 
 /**
  * Compact hero used on sub-pages (/belofte, /werkwijze).
+ * Use subSize="lead" when the intro paragraph is itself a statement (e.g. /belofte).
  * For the bespoke landing-page hero, build inline in app/page.tsx.
  */
-export function PageHero({ eyebrow, title, sub, meta }: PageHeroProps) {
+export function PageHero({ eyebrow, title, sub, subSize = 'default', meta }: PageHeroProps) {
   return (
     <section className="pt-24 pb-20 sm:pt-32 sm:pb-24">
       <Container>
@@ -36,16 +39,27 @@ export function PageHero({ eyebrow, title, sub, meta }: PageHeroProps) {
         </RiseIn>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
-          <div className="lg:col-span-9">
+          <div className={subSize === 'lead' ? 'lg:col-span-12' : 'lg:col-span-9'}>
             <RiseIn delay={0.05}>
               <Display size="lg" as="h1">
                 {title}
               </Display>
             </RiseIn>
           </div>
-          <div className="lg:col-span-3 lg:pt-3">
+          <div
+            className={
+              subSize === 'lead'
+                ? 'lg:col-span-12 lg:max-w-[820px] mt-8'
+                : 'lg:col-span-3 lg:pt-3'
+            }
+          >
             <FadeIn delay={0.2}>
-              <Body className="max-w-[420px]">{sub}</Body>
+              <Body
+                size={subSize === 'lead' ? 'lead' : 'default'}
+                className={subSize === 'lead' ? '' : 'max-w-[420px]'}
+              >
+                {sub}
+              </Body>
             </FadeIn>
           </div>
         </div>

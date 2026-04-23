@@ -1,4 +1,4 @@
-import { ArrowRight, ArrowUpRight, Code2, LayoutGrid, Target, Sparkles, ShieldCheck, Users } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { Container } from '@/components/layout/container';
 import { Display } from '@/components/ui/display';
 import { Body } from '@/components/ui/body';
@@ -9,17 +9,19 @@ import { Button } from '@/components/ui/button';
 import { OctopusLogo } from '@/components/marks/octopus-logo';
 import { RiseIn } from '@/components/motion/rise-in';
 import { FadeIn } from '@/components/motion/fade-in';
-import { PillarCard } from '@/components/sections/pillar-card';
+import { TeaserRow } from '@/components/sections/teaser-row';
+import { IndexRow } from '@/components/sections/index-row';
+import { InkDrawDivider } from '@/components/sections/ink-draw-divider';
 import { CTABlock } from '@/components/sections/cta-block';
 
-const INTAKE_HREF = 'mailto:hello@oktobus.com?subject=Intake%20Oktobus';
+const INTAKE_HREF = 'mailto:contact@oktobus.com?subject=Kennismaking%20Oktobus';
 
 export default function HomePage() {
   return (
     <>
       {/* ============== HERO ============== */}
       <section className="relative">
-        <Container className="pt-20 pb-24 sm:pt-32 sm:pb-36">
+        <Container className="pt-20 pb-20 sm:pt-32 sm:pb-28">
           {/* Index marker */}
           <RiseIn>
             <div className="flex items-center gap-4 mb-12 sm:mb-16">
@@ -32,25 +34,21 @@ export default function HomePage() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
             {/* Headline */}
             <div className="lg:col-span-9">
-              <h1 className="font-sans font-medium text-ink text-[clamp(48px,10vw,112px)] leading-[1.02] tracking-[-0.05em]">
+              <h1 className="font-sans font-medium text-ink text-[clamp(44px,9vw,104px)] leading-[1.02] tracking-[-0.045em]">
                 <RiseIn delay={0.05}>
-                  <span className="block">AI-software</span>
+                  <span className="block">
+                    Software die past{' '}
+                    <span
+                      className="inline-block align-middle mx-1 w-[clamp(34px,4.5vw,56px)] h-[clamp(34px,4.5vw,56px)] rounded-[4px] bg-teal"
+                      aria-hidden
+                    >
+                      <OctopusLogo size={56} className="w-full h-full" />
+                    </span>
+                  </span>
                 </RiseIn>
                 <RiseIn delay={0.18}>
                   <span className="block">
-                    op maat,{' '}
-                    <span
-                      className="inline-block align-middle mx-1 w-[clamp(36px,5vw,60px)] h-[clamp(36px,5vw,60px)] rounded-[4px] bg-teal"
-                      aria-hidden
-                    >
-                      <OctopusLogo size={60} className="w-full h-full" />
-                    </span>{' '}
-                    zonder
-                  </span>
-                </RiseIn>
-                <RiseIn delay={0.32}>
-                  <span className="block">
-                    de <span className="text-teal-ink">plakband-fase</span>.
+                    bij hoe jouw <span className="text-teal-ink">bedrijf</span> werkt.
                   </span>
                 </RiseIn>
               </h1>
@@ -58,58 +56,53 @@ export default function HomePage() {
 
             {/* Meta column */}
             <div className="lg:col-span-3 lg:pt-4">
-              <FadeIn delay={0.5}>
+              <FadeIn delay={0.45}>
                 <Num>→ 001 / STUDIO</Num>
                 <Body muted={false} className="mt-3 max-w-[260px]">
-                  Oktobus is Jochem, David en Max. Drie disciplines onder één dak: Product, Design,
-                  Engineering.
+                  Oktobus is een klein team van drie. Product, design en engineering in één.
                 </Body>
                 <Hairline className="my-6" />
                 <Num>→ 002 / BELOFTE</Num>
                 <Body muted={false} className="mt-3 max-w-[260px]">
-                  AI-software op maat voor het mkb. We leveren <span className="font-medium">production-ready</span> —
-                  geen demo in een PDF.
+                  Geen tussenlagen, geen accountmanagers — je werkt direct met de mensen die bouwen.
                 </Body>
-                <div className="mt-8 flex flex-col gap-3">
+                <div className="mt-8">
                   <Button
                     href={INTAKE_HREF}
                     size="lg"
                     className="justify-between w-full"
                     endIcon={<ArrowRight size={14} strokeWidth={1.6} />}
                   >
-                    Plan een intake
-                  </Button>
-                  <Button
-                    href="/werkwijze"
-                    variant="ghost"
-                    size="lg"
-                    className="justify-between w-full"
-                    endIcon={<ArrowUpRight size={14} strokeWidth={1.6} />}
-                  >
-                    Recent werk (3)
+                    Plan een kennismaking
                   </Button>
                 </div>
               </FadeIn>
             </div>
           </div>
 
-          {/* Stat strip */}
-          <FadeIn delay={0.75}>
-            <div className="mt-20 grid grid-cols-2 lg:grid-cols-4 gap-10">
-              <StatItem label="→ CAPACITEIT" value="2" sub="projecten / kwartaal" />
-              <StatItem label="→ TIJD TOT LIVE" value="6–12" sub="weken" />
-              <StatItem label="→ OVERDRACHT" value="100%" sub="eigen code" />
-              <StatItem
-                label="→ VOLGEND SLOT"
-                value={
-                  <span className="inline-flex items-center gap-2">
-                    <span className="focus-dot breathe" />
-                    Q3 &rsquo;26
-                  </span>
-                }
-              />
-            </div>
-          </FadeIn>
+          {/* Subline — three lines, one per sentence */}
+          <div className="mt-12 sm:mt-16 max-w-[820px]">
+            <RiseIn delay={0.32} amount="small">
+              <p className="text-[18px] sm:text-[22px] leading-[1.45] tracking-[-0.015em] text-ink">
+                Wij bouwen maatwerk software voor het MKB — met AI als bouwsteen, niet als feature.
+              </p>
+            </RiseIn>
+            <RiseIn delay={0.42} amount="small">
+              <p className="text-[18px] sm:text-[22px] leading-[1.45] tracking-[-0.015em] text-ink-2 mt-2">
+                Sneller dan een traditioneel bureau.
+              </p>
+            </RiseIn>
+            <RiseIn delay={0.52} amount="small">
+              <p className="text-[18px] sm:text-[22px] leading-[1.45] tracking-[-0.015em] text-ink-2">
+                Slimmer dan de zoveelste abonnement-tool.
+              </p>
+            </RiseIn>
+          </div>
+        </Container>
+
+        {/* InkDraw signatuur */}
+        <Container className="pb-10 sm:pb-14">
+          <InkDrawDivider />
         </Container>
       </section>
 
@@ -126,16 +119,14 @@ export default function HomePage() {
             <div className="lg:col-span-9">
               <RiseIn delay={0.05}>
                 <Display size="md" as="p">
-                  Drie mensen, één tafel. Korte lijnen, geen handovers, geen lagen — wij beslissen samen
-                  met jou wat erin moet en wat niet.
+                  Oktobus is een klein team van drie. Product, design en engineering in één.
                 </Display>
               </RiseIn>
             </div>
             <div className="lg:col-span-3 lg:pt-3">
               <FadeIn delay={0.2}>
                 <Body className="max-w-[280px]">
-                  Product-denken, vormgeving en engineering naast elkaar. Wat hier ontworpen wordt, kan hier
-                  ook gebouwd worden — vanaf dezelfde dag.
+                  Geen tussenlagen, geen accountmanagers — je werkt direct met de mensen die bouwen.
                 </Body>
               </FadeIn>
             </div>
@@ -147,47 +138,50 @@ export default function HomePage() {
       <section className="border-t border-[color:var(--color-line-hair)]">
         <Container className="py-20 sm:py-28">
           <RiseIn>
-            <div className="flex items-end justify-between flex-wrap gap-6 mb-12 sm:mb-16">
+            <div className="flex items-end justify-between flex-wrap gap-6 mb-10 sm:mb-14">
               <div className="flex items-center gap-4 flex-1 min-w-[260px]">
                 <Eyebrow>003 — BELOFTE</Eyebrow>
                 <Hairline className="flex-1" />
               </div>
-              <Button
-                href="/belofte"
-                variant="ghost"
-                size="sm"
-                endIcon={<ArrowRight size={14} strokeWidth={1.6} />}
-              >
-                Lees onze belofte
-              </Button>
+              <Display size="sm" as="h2" className="w-full mt-4">
+                Wat je van ons mag verwachten
+              </Display>
             </div>
           </RiseIn>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="border-b border-[color:var(--color-line-hair)]">
             <RiseIn delay={0.05}>
-              <PillarCard
+              <TeaserRow
                 number="01"
-                icon={<Sparkles size={20} strokeWidth={1.2} />}
-                title="AI waar het werkt"
-                description="We zetten AI alleen in waar het echt wat oplost. Geen chatbot voor de chatbot — wel een assistent die je team uren per week scheelt."
+                title="Maatwerk, geen compromissen"
+                description="Software die past op jouw proces, niet andersom."
               />
             </RiseIn>
-            <RiseIn delay={0.15}>
-              <PillarCard
+            <RiseIn delay={0.12}>
+              <TeaserRow
                 number="02"
-                icon={<ShieldCheck size={20} strokeWidth={1.2} />}
-                title="Code die blijft staan"
-                description="Production-ready vanaf dag één. Tests, observability, evals voor LLM-flows. Geen prototype met plakband — software die jaren mee gaat."
+                title="MKB-budget, geen bureau-prijs"
+                description="Wat bij een traditioneel bureau €200k en zes maanden kost, leveren wij in weken tegen een fractie."
               />
             </RiseIn>
-            <RiseIn delay={0.25}>
-              <PillarCard
+            <RiseIn delay={0.19}>
+              <TeaserRow
                 number="03"
-                icon={<Users size={20} strokeWidth={1.2} />}
-                title="Mens aan tafel"
-                description="Je werkt met de drie mensen die het bouwen. Geen accountmanager, geen tussenpersoon. Korte lijn, snelle beslissingen."
+                title="Werkende software, geen prototype met plakband"
+                description="Alles wat we opleveren is production-ready. Vanaf dag één."
               />
             </RiseIn>
+          </div>
+
+          <div className="mt-10">
+            <Button
+              href="/belofte"
+              variant="ghost"
+              size="md"
+              endIcon={<ArrowRight size={14} strokeWidth={1.6} />}
+            >
+              Lees meer over onze belofte
+            </Button>
           </div>
         </Container>
       </section>
@@ -196,62 +190,50 @@ export default function HomePage() {
       <section className="border-t border-[color:var(--color-line-hair)]">
         <Container className="py-20 sm:py-28">
           <RiseIn>
-            <div className="flex items-end justify-between flex-wrap gap-6 mb-12 sm:mb-16">
+            <div className="flex items-end justify-between flex-wrap gap-6 mb-10 sm:mb-14">
               <div className="flex items-center gap-4 flex-1 min-w-[260px]">
                 <Eyebrow>004 — WERKWIJZE</Eyebrow>
                 <Hairline className="flex-1" />
               </div>
-              <Button
-                href="/werkwijze"
-                variant="ghost"
-                size="sm"
-                endIcon={<ArrowRight size={14} strokeWidth={1.6} />}
-              >
-                Bekijk werkwijze
-              </Button>
+              <Display size="sm" as="h2" className="w-full mt-4">
+                Hoe we bouwen
+              </Display>
             </div>
           </RiseIn>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="border-b border-[color:var(--color-line-hair)]">
             <RiseIn delay={0.05}>
-              <PillarCard
+              <IndexRow
                 number="01"
-                icon={<LayoutGrid size={20} strokeWidth={1.2} />}
-                title="Snelle bouwstraat"
-                description="Een gestandaardiseerde manier van bouwen met herbruikbare bouwstenen. Daardoor leveren we sneller én voorspelbaarder."
-                items={[
-                  { label: 'Discovery', value: '2 WKN' },
-                  { label: 'Build', value: '4–8 WKN' },
-                  { label: 'Live', value: '6–12 WKN' },
-                ]}
+                title="Snelle, betrouwbare bouwstraat"
+                href="/werkwijze#pijler-1"
               />
             </RiseIn>
-            <RiseIn delay={0.15}>
-              <PillarCard
+            <RiseIn delay={0.12}>
+              <IndexRow
                 number="02"
-                icon={<Code2 size={20} strokeWidth={1.2} />}
                 title="Diepe software-kennis"
-                description="We weten wat onder de motorkap zit en kiezen de juiste oplossing per situatie. Geen one-size — wel een passend gereedschap."
-                items={[
-                  { label: 'Architectuur', value: 'OP MAAT' },
-                  { label: 'LLM-evals', value: 'CONTINU' },
-                  { label: 'Onderhoud', value: 'SLA' },
-                ]}
+                href="/werkwijze#pijler-2"
               />
             </RiseIn>
-            <RiseIn delay={0.25}>
-              <PillarCard
+            <RiseIn delay={0.19}>
+              <IndexRow
                 number="03"
-                icon={<Target size={20} strokeWidth={1.2} />}
-                title="Product- & strategiegevoel"
-                description="Builders die ook product-denken: wat moet er wel en niet in, en hoe past het in je ICT-landschap. Strategie en techniek hand-in-hand."
-                items={[
-                  { label: 'Roadmap', value: '1 WK' },
-                  { label: 'Scope-keuzes', value: 'SAMEN' },
-                  { label: 'Meet & leer', value: 'LOPEND' },
-                ]}
+                title="Builders met product- en strategiegevoel"
+                href="/werkwijze#pijler-3"
               />
             </RiseIn>
+          </div>
+
+          <div className="mt-10">
+            <Button
+              href="/werkwijze"
+              variant="ghost"
+              size="md"
+              endIcon={<ArrowRight size={14} strokeWidth={1.6} />}
+            >
+              Bekijk onze werkwijze
+            </Button>
           </div>
         </Container>
       </section>
@@ -260,36 +242,11 @@ export default function HomePage() {
       <div className="border-t border-[color:var(--color-line-hair)]">
         <CTABlock
           eyebrow="005 — CONTACT"
-          title={<>Klaar om iets <span className="text-teal-ink">echt</span> te bouwen?</>}
-          description="Eén intake van 30 minuten is genoeg om te kijken of we passen. Geen verplichting, wel een eerlijk gesprek."
-          primary={{ label: 'Plan een intake', href: INTAKE_HREF }}
-          secondary={{ label: 'Bekijk werkwijze', href: '/werkwijze' }}
+          title={<>Benieuwd wat wij voor jouw bedrijf kunnen bouwen?</>}
+          description="Plan een kennismaking van 30 minuten. Geen verkooppraat — we kijken of het klikt en of er iets zinnigs te bouwen valt."
+          primary={{ label: 'Plan een kennismaking', href: INTAKE_HREF }}
         />
       </div>
     </>
-  );
-}
-
-function StatItem({
-  label,
-  value,
-  sub,
-}: {
-  label: string;
-  value: React.ReactNode;
-  sub?: string;
-}) {
-  return (
-    <div>
-      <Num className="block mb-2">{label}</Num>
-      <div className="font-sans font-medium text-[clamp(24px,3.5vw,32px)] leading-[1.1] tracking-[-0.03em] text-ink">
-        {value}
-        {sub ? (
-          <span className="text-ink-2 text-[clamp(14px,1.6vw,20px)] font-normal ml-1">
-            {sub}
-          </span>
-        ) : null}
-      </div>
-    </div>
   );
 }

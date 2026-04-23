@@ -1,80 +1,96 @@
 import type { Metadata } from 'next';
-import { LayoutGrid, Code2, Target } from 'lucide-react';
+import { LayoutGrid, Wrench, Compass } from 'lucide-react';
 import { Container } from '@/components/layout/container';
 import { Display } from '@/components/ui/display';
 import { Body } from '@/components/ui/body';
 import { Eyebrow } from '@/components/ui/eyebrow';
 import { Hairline } from '@/components/ui/hairline';
-import { Num } from '@/components/ui/num';
 import { RiseIn } from '@/components/motion/rise-in';
 import { FadeIn } from '@/components/motion/fade-in';
 import { PageHero } from '@/components/sections/page-hero';
 import { CTABlock } from '@/components/sections/cta-block';
+import { cn } from '@/lib/cn';
 
 export const metadata: Metadata = {
   title: 'Werkwijze',
   description:
-    'Drie pijlers: snelle bouwstraat, diepe software-kennis, builders met product- en strategiegevoel.',
+    'Drie pijlers: een eigen bouwstraat, diepe software-kennis, builders met product- en strategiegevoel.',
 };
 
-const INTAKE_HREF = 'mailto:hello@oktobus.com?subject=Intake%20Oktobus';
+const INTAKE_HREF = 'mailto:contact@oktobus.com?subject=Kennismaking%20Oktobus';
+
+type IconPosition = 'left' | 'center' | 'right';
 
 type PillarSectionProps = {
+  id: string;
   number: string;
   eyebrow: string;
   icon: React.ReactNode;
+  iconPosition: IconPosition;
   title: React.ReactNode;
-  body: React.ReactNode;
-  items: Array<{ label: string; value: string }>;
+  paragraphs: React.ReactNode[];
 };
 
-function PillarSection({ number, eyebrow, icon, title, body, items }: PillarSectionProps) {
-  return (
-    <section className="border-t border-[color:var(--color-line-hair)]">
-      <Container className="py-20 sm:py-28">
-        <RiseIn>
-          <div className="flex items-center gap-4 mb-12 sm:mb-16">
-            <Num className="font-mono text-[12px] tracking-[0.12em] text-ink">{number}</Num>
-            <Eyebrow>{eyebrow}</Eyebrow>
-            <Hairline className="flex-1" />
-          </div>
-        </RiseIn>
+function PillarSection({
+  id,
+  number,
+  eyebrow,
+  icon,
+  iconPosition,
+  title,
+  paragraphs,
+}: PillarSectionProps) {
+  const iconAlignment: Record<IconPosition, string> = {
+    left: 'self-start',
+    center: 'self-center',
+    right: 'self-end',
+  };
 
+  return (
+    <section
+      id={id}
+      className="border-t border-[color:var(--color-line-hair)] scroll-mt-24"
+    >
+      <Container className="py-20 sm:py-28">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16">
+          <div className="lg:col-span-5">
+            <RiseIn>
+              <div className="flex items-center gap-4 mb-8">
+                <Eyebrow>{eyebrow}</Eyebrow>
+                <Hairline className="flex-1 max-w-[80px]" />
+              </div>
+            </RiseIn>
+            <RiseIn delay={0.05}>
+              <span className="block font-sans font-medium text-[clamp(72px,9vw,128px)] leading-none tracking-[-0.045em] text-ink">
+                {number}
+              </span>
+            </RiseIn>
+          </div>
+
           <div className="lg:col-span-7">
             <RiseIn delay={0.05}>
-              <span className="inline-flex w-12 h-12 items-center justify-center rounded-full border border-[color:var(--color-line-hair)] mb-8 text-ink">
+              <span
+                aria-hidden
+                className={cn(
+                  'flex w-14 h-14 items-center justify-center rounded-full border border-[color:var(--color-line-hair)] text-ink mb-8',
+                  iconAlignment[iconPosition],
+                )}
+              >
                 {icon}
               </span>
             </RiseIn>
             <RiseIn delay={0.1}>
-              <Display size="md" as="h2" className="max-w-[680px]">
+              <Display size="sm" as="h2" className="max-w-[600px]">
                 {title}
               </Display>
             </RiseIn>
-            <RiseIn delay={0.2}>
-              <Body className="mt-8 max-w-[560px]">{body}</Body>
-            </RiseIn>
-          </div>
-
-          <div className="lg:col-span-5 lg:pt-2">
-            <FadeIn delay={0.25}>
-              <div className="bento p-7 sm:p-8">
-                <Eyebrow>WAT JE KRIJGT</Eyebrow>
-                <Hairline className="mt-5 mb-6" />
-                <ul className="space-y-3">
-                  {items.map((item) => (
-                    <li
-                      key={item.label}
-                      className="flex justify-between gap-4 text-[14px] text-ink"
-                    >
-                      <span>{item.label}</span>
-                      <Num className="shrink-0">{item.value}</Num>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </FadeIn>
+            <div className="mt-8 space-y-5 max-w-[640px]">
+              {paragraphs.map((p, i) => (
+                <FadeIn key={i} delay={0.2 + i * 0.1}>
+                  <Body className="text-[15px] sm:text-[16px] leading-[1.65]">{p}</Body>
+                </FadeIn>
+              ))}
+            </div>
           </div>
         </div>
       </Container>
@@ -87,87 +103,46 @@ export default function WerkwijzePage() {
     <>
       <PageHero
         eyebrow="WERKWIJZE"
-        title={
-          <>
-            Drie pijlers waarop alles rust. <span className="text-teal-ink">Geen geheim</span>, wel
-            consequent.
-          </>
-        }
-        sub="Hoe we werken bepaalt wat we kunnen leveren. Snelheid komt uit standaardisatie. Diepte komt uit ervaring. Het juiste antwoord komt uit product-denken."
-        meta={{ label: 'OKTOBUS', value: 'METHODE V1' }}
+        title="Zo bouwen we"
+        sub="Snelheid zonder kwaliteitsverlies komt niet uit trucjes — het komt uit drie dingen die we goed hebben geregeld: onze eigen bouwstraat, diepe software-kennis, en een team dat verder denkt dan de code."
       />
 
       <PillarSection
+        id="pijler-1"
         number="01"
         eyebrow="PIJLER — BOUWSTRAAT"
-        icon={<LayoutGrid size={22} strokeWidth={1.2} />}
-        title={
-          <>
-            Een snelle, betrouwbare <span className="text-teal-ink">bouwstraat</span>.
-          </>
-        }
-        body={
-          <>
-            We bouwen niet elke keer vanaf nul. Authenticatie, deploy-pipelines, observability, evals voor
-            LLM-flows — dat staat al. Wat we voor jou ontwerpen plug je in op een fundament dat al
-            bewezen werkt. Resultaat: minder bouwtijd, voorspelbare kwaliteit, en een product dat morgen al
-            live kan.
-          </>
-        }
-        items={[
-          { label: 'Auth & users', value: 'STD' },
-          { label: 'CI/CD', value: 'STD' },
-          { label: 'Observability', value: 'STD' },
-          { label: 'LLM-evals', value: 'STD' },
-          { label: 'Backups & DR', value: 'STD' },
+        icon={<LayoutGrid size={26} strokeWidth={1.2} />}
+        iconPosition="left"
+        title="Een bouwstraat die werkt voor je het weet"
+        paragraphs={[
+          'Wij hebben onze eigen manier van bouwen gestandaardiseerd. Herbruikbare bouwstenen voor dingen die in elk project terugkomen — inlog, rechten, koppelingen, AI-integraties. Ingebouwde kwaliteitschecks die bij elke wijziging automatisch draaien. En bewezen architectuurpatronen die we niet elk project opnieuw hoeven uit te vinden.',
+          'Het resultaat: wij starten niet bij nul. Waar een bureau de eerste weken nog aan fundamenten bouwt, leveren wij al werkende functionaliteit op.',
         ]}
       />
 
       <PillarSection
+        id="pijler-2"
         number="02"
         eyebrow="PIJLER — KENNIS"
-        icon={<Code2 size={22} strokeWidth={1.2} />}
-        title={
-          <>
-            Diepe <span className="text-teal-ink">software-kennis</span>, niet één trucje.
-          </>
-        }
-        body={
-          <>
-            We weten wat onder de motorkap zit. Welke databases, welke LLM-providers, welke architecturen
-            voor welk soort werk. Geen one-size-fits-all — wel de keuze die het beste past bij wat jij
-            doet. En als de markt over een jaar verandert, kunnen we mee bewegen zonder herbouw.
-          </>
-        }
-        items={[
-          { label: 'Stack-keuze', value: 'OP MAAT' },
-          { label: 'LLM-providers', value: 'MULTI' },
-          { label: 'Architectuur-review', value: 'BIJ START' },
-          { label: 'Migratiepad', value: 'INGEBOUWD' },
+        icon={<Wrench size={26} strokeWidth={1.2} />}
+        iconPosition="center"
+        title="We weten wat onder de motorkap zit"
+        paragraphs={[
+          'AI-tools maken bouwen sneller, maar ze nemen het denken niet over. Welke database past bij jouw datavolumes? Waar mag je een shortcut nemen en waar absoluut niet? Hoe zorg je dat je software over twee jaar nog mee kan?',
+          'Wij hebben jarenlang gebouwd voordat AI bestond. Die basis maakt het verschil tussen software die werkt op de demo en software die jaren meegaat.',
         ]}
       />
 
       <PillarSection
+        id="pijler-3"
         number="03"
         eyebrow="PIJLER — PRODUCT"
-        icon={<Target size={22} strokeWidth={1.2} />}
-        title={
-          <>
-            Builders met <span className="text-teal-ink">product- &amp; strategiegevoel</span>.
-          </>
-        }
-        body={
-          <>
-            Techniek alleen is niet genoeg. We helpen je beslissen wat erin moet en wat niet, hoe het past
-            bij je ICT-landschap, en welke volgende stap zin heeft. Strategie en bouwen zitten bij ons aan
-            dezelfde tafel — we leveren niet alleen code, we leveren een keuze die je kan uitleggen.
-          </>
-        }
-        items={[
-          { label: 'Roadmap-sessie', value: '1 DG' },
-          { label: 'Scope-keuzes', value: 'SAMEN' },
-          { label: 'Meet- & leerplan', value: 'STD' },
-          { label: 'Stakeholder-review', value: 'OP AFROEP' },
+        icon={<Compass size={26} strokeWidth={1.2} />}
+        iconPosition="right"
+        title="We bouwen het juiste, niet zomaar iets"
+        paragraphs={[
+          'De meeste projecten falen niet op de techniek — ze falen omdat het verkeerde gebouwd is. Wij zijn geen developers die wachten op een specificatie. We denken mee over wat je écht nodig hebt, welke functionaliteit eerst moet, en waar je ICT-landschap over drie jaar staat.',
+          'Product, techniek en strategie in één team. Dat scheelt drie overleggen en één vertaalslag.',
         ]}
       />
 
@@ -175,10 +150,9 @@ export default function WerkwijzePage() {
       <div className="border-t border-[color:var(--color-line-hair)]">
         <CTABlock
           eyebrow="VOLGENDE STAP"
-          title={<>Wil je weten of dit voor jullie werkt?</>}
-          description="Eén intake-gesprek van 30 minuten. We luisteren, schetsen een aanpak, en je weet meteen waar we staan."
-          primary={{ label: 'Plan een intake', href: INTAKE_HREF }}
-          secondary={{ label: 'Lees de belofte', href: '/belofte' }}
+          title="Benieuwd hoe dit voor jouw bedrijf uitpakt?"
+          description="In een kennismaking van 30 minuten kijken we samen of er iets zinnigs te bouwen valt."
+          primary={{ label: 'Plan een kennismaking', href: INTAKE_HREF }}
         />
       </div>
     </>
