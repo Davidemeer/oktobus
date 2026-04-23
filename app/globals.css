@@ -1,26 +1,379 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* =========================================================================
+ * Design tokens — single source of truth.
+ * See DESIGN.md §2 for the full specification. Use Tailwind utilities
+ * generated from these tokens (bg-bone, text-ink-2, text-teal-ink, etc).
+ * ========================================================================= */
+
+@theme {
+  /* Base surfaces */
+  --color-bone: #f3efe9;
+  --color-bone-2: #e9e4db;
+  --color-paper: #fbf9f5;
+
+  /* Text & outline */
+  --color-ink: #0b0b0a;
+  --color-ink-2: #63615c;
+
+  /* Accent — use sparingly, max one per viewport */
+  --color-teal: #51a397;
+  --color-teal-ink: #2f6e66;
+
+  /* Hairlines */
+  --color-line: rgb(11 11 10 / 0.1);
+  --color-line-soft: rgb(11 11 10 / 0.07);
+  --color-line-hair: rgb(11 11 10 / 0.12);
+
+  /* Font stacks — wired to next/font variables from app/layout.tsx */
+  --font-sans: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, "SF Mono", Menlo, monospace;
+
+  /* Display type scale (see DESIGN.md §2.3) */
+  --text-hero: 7rem;
+  --text-hero--line-height: 1.02;
+  --text-hero--letter-spacing: -0.05em;
+
+  --text-display: 6rem;
+  --text-display--line-height: 0.95;
+  --text-display--letter-spacing: -0.055em;
+
+  --text-h2: 4rem;
+  --text-h2--line-height: 1.02;
+  --text-h2--letter-spacing: -0.04em;
+
+  --text-h3: 2.5rem;
+  --text-h3--line-height: 1.05;
+  --text-h3--letter-spacing: -0.035em;
+
+  --text-pnum: 2.125rem;
+  --text-pnum--line-height: 1;
+  --text-pnum--letter-spacing: -0.04em;
+
+  --text-pillar: 1.875rem;
+  --text-pillar--line-height: 1.1;
+  --text-pillar--letter-spacing: -0.035em;
+
+  --text-stat: 2rem;
+  --text-stat--line-height: 1.1;
+  --text-stat--letter-spacing: -0.03em;
+
+  --text-lead: 1.5rem;
+  --text-lead--line-height: 1.35;
+  --text-lead--letter-spacing: -0.025em;
+
+  --text-body: 0.875rem;
+  --text-body--line-height: 1.65;
+
+  --text-ui: 0.844rem;
+  --text-ui--line-height: 1.5;
+
+  --text-list: 0.813rem;
+  --text-list--line-height: 1.5;
+
+  --text-mono: 0.688rem;
+  --text-mono--line-height: 1.4;
+  --text-mono--letter-spacing: 0.12em;
+
+  --text-num: 0.656rem;
+  --text-num--line-height: 1.4;
+  --text-num--letter-spacing: 0.08em;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+/* =========================================================================
+ * Base
+ * ========================================================================= */
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  background: var(--color-bone);
+  color: var(--color-ink);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  font-feature-settings: "ss01", "cv11";
+  background: var(--color-bone);
+  color: var(--color-ink);
+}
+
+/* =========================================================================
+ * Keyframes (see DESIGN.md §5)
+ *   sway and breathe are continuous CSS loops.
+ *   The rest are reference; page-level reveals use Motion's whileInView.
+ * ========================================================================= */
+
+@keyframes riseIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes wipeRight {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes tentacleSway {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0);
+  }
+  50% {
+    transform: translateY(-2px) rotate(0.6deg);
+  }
+}
+
+@keyframes breathe {
+  0%,
+  100% {
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes markerDot {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+@keyframes inkDraw {
+  from {
+    stroke-dashoffset: 260;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.sway {
+  animation: tentacleSway 6s ease-in-out infinite;
+  transform-origin: center;
+}
+
+.breathe {
+  animation: breathe 3s ease-in-out infinite;
+}
+
+.ink-draw {
+  stroke-dasharray: 260;
+  animation: inkDraw 2.2s cubic-bezier(0.5, 0, 0.3, 1) forwards 0.6s;
+}
+
+/* =========================================================================
+ * Component classes (see DESIGN.md §6)
+ * ========================================================================= */
+
+.hairline {
+  height: 1px;
+  background: var(--color-line);
+}
+
+.vrule {
+  width: 1px;
+  background: var(--color-line);
+}
+
+.num {
+  font-family: var(--font-mono);
+  font-size: 0.656rem;
+  letter-spacing: 0.08em;
+  color: var(--color-ink-2);
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.688rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-ink-2);
+}
+
+.navlink {
+  position: relative;
+  color: var(--color-ink);
+}
+.navlink::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -4px;
+  height: 1px;
+  background: var(--color-ink);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.navlink:hover::after {
+  transform: scaleX(1);
+}
+
+.btn-primary {
+  background: var(--color-ink);
+  color: var(--color-bone);
+  transition: all 0.35s ease;
+}
+.btn-primary:hover {
+  background: var(--color-teal-ink);
+}
+
+.btn-ghost {
+  border: 1px solid rgb(11 11 10 / 0.13);
+  transition: all 0.35s ease;
+}
+.btn-ghost:hover {
+  border-color: var(--color-ink);
+}
+
+.bento {
+  border: 1px solid var(--color-line-soft);
+  background: var(--color-paper);
+  border-radius: 2px;
+  transition: all 0.5s ease;
+}
+.bento:hover {
+  border-color: var(--color-ink);
+}
+
+.pillar {
+  background: var(--color-paper);
+  border: 1px solid rgb(11 11 10 / 0.09);
+  border-radius: 2px;
+  transition: all 0.45s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.pillar:hover {
+  border-color: var(--color-ink);
+  transform: translateY(-3px);
+}
+.pillar .pnum {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: 2.125rem;
+  letter-spacing: -0.04em;
+  color: var(--color-ink);
+  line-height: 1;
+}
+.pillar h3.ptitle {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: 1.875rem;
+  letter-spacing: -0.035em;
+  line-height: 1.1;
+  margin-top: 40px;
+}
+.pillar .picon {
+  width: 44px;
+  height: 44px;
+  border-radius: 9999px;
+  border: 1px solid rgb(11 11 10 / 0.13);
+  display: grid;
+  place-items: center;
+  transition: border-color 0.4s ease;
+}
+.pillar:hover .picon {
+  border-color: var(--color-ink);
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 80px 1.1fr 2fr 120px 80px;
+  align-items: center;
+  gap: 24px;
+  padding: 28px 0;
+  border-top: 1px solid rgb(11 11 10 / 0.09);
+  transition:
+    background 0.3s ease,
+    padding-left 0.4s ease;
+}
+.row:hover {
+  background: rgb(11 11 10 / 0.02);
+  padding-left: 16px;
+}
+.row:hover .row-arrow {
+  opacity: 1;
+  transform: translateX(0);
+}
+.row-arrow {
+  opacity: 0;
+  transform: translateX(-8px);
+  transition: all 0.4s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.focus-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 9999px;
+  background: var(--color-teal);
+  display: inline-block;
+}
+
+.logo-tile {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+.logo-sq {
+  width: 28px;
+  height: 28px;
+  background: var(--color-teal);
+  border-radius: 2px;
+  display: grid;
+  place-items: center;
+  transition: all 0.5s ease;
+}
+.logo-tile:hover .logo-sq {
+  background: var(--color-ink);
+}
+.logo-tile:hover .logo-sq path {
+  fill: var(--color-teal);
+}
+.wm {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  font-size: 15px;
+}
+
+/* =========================================================================
+ * Reduced motion (see DESIGN.md §5.5)
+ * ========================================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .sway,
+  .breathe,
+  .ink-draw {
+    animation: none !important;
+  }
 }

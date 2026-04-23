@@ -1,29 +1,42 @@
 @AGENTS.md
+@DESIGN.md
 
 # Oktobus marketing-site
 
-AI-software bureau (Jochem Michiels, David, Max) marketing-site. NL+EN.
+3-koppig AI-software bureau (Jochem Michiels, David, Max). Marketing-site met drie pagina's: `/`, `/belofte`, `/werkwijze`. Pitch-klaar.
 
 ## Stack
 - Next.js 16 (App Router) + React 19 + TypeScript strict
-- Tailwind v4 (`@import "tailwindcss";` in `app/globals.css`)
-- Built-in i18n: `app/[lang]/...` + dictionaries pattern (no next-intl)
-- `proxy.ts` handles locale detection + redirect (Next 16 renamed middleware → proxy)
-- `zod` for env validation in `lib/env.ts` (imported from `next.config.ts` so app fails fast)
-- Hosted lokaal voor nu — deploy-klaar maar nog niet uitgevoerd (zie plan)
+- Tailwind v4 — alle tokens via `@theme` in `app/globals.css`. Géén `tailwind.config.ts`.
+- `motion` (react animaties), `lenis` (smooth scroll), `clsx` + `tailwind-merge` (className-utils), `lucide-react` (generic icons)
+- `zod` voor env-validatie in `lib/env.ts`
+- Lokaal hosting; deploy-config klaar maar niet uitgevoerd
+
+## Naamgeving
+- Brand: **Oktobus** (met K). Altijd zo schrijven in code, metadata, page titles, copy.
+- Logo-asset bestand heet `octobus_v2.svg` (met C) — alleen file-naam, geen tekst-content.
+
+## Design system
+DESIGN.md is de single source of truth. Lees vóór UI-werk:
+- §2 Tokens (kleuren, type-scale)
+- §5 Animatie-regels (sway/breathe = CSS loop, rest = Motion `whileInView`)
+- §6 Component-regels (buttons, cards, eyebrows)
+
+## Component-bibliotheek
+- `components/ui/` — Eyebrow, Display, Body, Num, Hairline, Button
+- `components/marks/` — OctopusLogo, LogoTile
+- `components/motion/` — RiseIn, FadeIn (gebruiken `useReducedMotion`)
+- `components/layout/` — Container, Section, Header, Footer, SmoothScroll
+- `components/sections/` — PageHero, PillarCard, CTABlock
 
 ## Conventies
-- Routes always under `[lang]` segment. Default locale = `nl`.
-- Dictionaries are JSON files in `app/[lang]/dictionaries/`. Add new keys to both `nl.json` and `en.json`.
-- Server Components by default. `'use client'` only when state/event handlers needed.
-- Security headers in `next.config.ts` (CSP zonder nonce, HSTS, X-Frame-Options, etc.)
-- Geen secrets in code. `.env.local` gitignored, `.env.example` als template.
+- Server Components default. `'use client'` alleen waar interactieve state nodig is (Header, motion-wrappers, SmoothScroll).
+- Internal links → Next `<Link>`. External / mailto → `<a>`.
+- ClassNames via `cn()` uit `lib/cn.ts`.
+- Geen italics, geen box-shadows, geen gradients (DESIGN.md §8).
 
 ## Commands
 - `pnpm dev` — local dev (hot reload)
 - `pnpm build && pnpm start` — productie-build lokaal valideren
 - `pnpm typecheck` — TS check
 - `pnpm lint` — ESLint
-
-## Plan
-Volledige architectuur en tijdlijn: `/Users/david/.claude/plans/ik-wil-een-bedrijf-jaunty-neumann.md`.
