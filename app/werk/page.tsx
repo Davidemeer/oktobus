@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     'Drie projecten, drie verschillende vragen. Wat ze delen: maatwerk dat in productie staat.',
 };
 
-const INTAKE_HREF = '/contact';
+const INTAKE_HREF = '/contact#intake';
 
 export default function WerkPage() {
   return (
@@ -132,7 +132,7 @@ export default function WerkPage() {
                 </div>
               }
               handnote="Geen integratie die bij elke ERP-update omvalt. Architectuur gekozen op wat ze over 3 jaar nodig hebben, niet wat ze vandaag toevallig vragen."
-              body="Groeiend MKB-bouwbedrijf had een ERP dat elke nieuwe vestiging op maat wilde laten rijmen — wat bij de laatste leverancier elke update een brandweerklus werd. Wij hebben de koppeling omgebouwd met schone abstracties en evals op de datastromen: nieuwe vestiging openen is nu configuratie, geen maatwerk-sprint."
+              body="Groeiend bouwbedrijf had een ERP dat elke nieuwe vestiging op maat wilde laten rijmen — wat bij de laatste leverancier elke update een brandweerklus werd. Wij hebben de koppeling omgebouwd met schone abstracties en evals op de datastromen: nieuwe vestiging openen is nu configuratie, geen maatwerk-sprint."
               meta={[
                 { label: 'STACK', value: 'Node · Postgres · Queue' },
                 { label: 'DUUR', value: '9 weken' },
@@ -237,7 +237,7 @@ export default function WerkPage() {
             <div className="lg:col-span-6 lg:pb-3">
               <RiseIn delay={0.1}>
                 <p className="text-[20px] leading-[1.5] tracking-[-0.01em] max-w-[480px]" style={{ color: '#F3EFE9CC' }}>
-                  We nemen twee nieuwe projecten per kwartaal aan. Plan een kennismaking — we kijken
+                  We nemen drie nieuwe projecten per kwartaal aan. Plan een kennismaking — we kijken
                   of het klikt en of er iets zinnigs te bouwen valt.
                 </p>
                 <div className="mt-10">

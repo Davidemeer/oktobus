@@ -46,7 +46,7 @@ export function Header() {
           ))}
           <Num className="select-none">NL · EN</Num>
           <Link
-            href="/contact"
+            href="/contact#intake"
             className="btn-primary inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-[13px]"
           >
             Plan een kennismaking
@@ -92,7 +92,7 @@ export function Header() {
           <div className="hairline mt-2" />
           <Num className="select-none">NL · EN</Num>
           <Link
-            href="/contact"
+            href="/contact#intake"
             onClick={() => setMobileOpen(false)}
             className="btn-primary inline-flex items-center justify-between gap-2 px-5 py-3.5 rounded-full text-[13.5px] self-start mt-4 min-w-[240px]"
           >

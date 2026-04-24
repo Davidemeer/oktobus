@@ -23,7 +23,7 @@ const FAQ_ITEMS = [
   },
   {
     q: 'Hoe snel kunnen we starten?',
-    a: 'We nemen twee projecten per kwartaal aan. Eerstvolgende slot is Q3 ’26. In drukke periodes kunnen we een kort vooronderzoek doen terwijl je in de wachtrij staat.',
+    a: 'We nemen drie projecten per kwartaal aan. Eerstvolgende slot is Q3 ’26. In drukke periodes kunnen we een kort vooronderzoek doen terwijl je in de wachtrij staat.',
   },
   {
     q: 'Wat als we de code zelf willen onderhouden?',
@@ -31,7 +31,7 @@ const FAQ_ITEMS = [
   },
   {
     q: 'Werken jullie met bestaande systemen?',
-    a: 'Ja. De meeste MKB’s hebben al een landschap — ERP, CRM, boekhouding. Wij koppelen erop aan. We vervangen niet wat al werkt.',
+    a: 'Ja. De meeste bedrijven hebben al een landschap — ERP, CRM, boekhouding. Wij koppelen erop aan. We vervangen niet wat al werkt.',
   },
   {
     q: 'En AI-veiligheid, privacy, juridisch?',
@@ -121,13 +121,13 @@ export default function ContactPage() {
                     <ArrowUpRight size={18} strokeWidth={1.6} />
                   </a>
                   <a
-                    href="tel:+31200000000"
+                    href="tel:+31623555281"
                     className="flex items-center justify-between py-5 border-t border-[color:var(--color-line)] transition-[padding-left] hover:pl-2"
                   >
                     <span>
-                      <Num className="block mb-1.5">→ BEL</Num>
+                      <Num className="block mb-1.5">→ BEL · DAVID</Num>
                       <span className="display text-[22px] tracking-[-0.02em]">
-                        +31 (0)20 — 000 00 00
+                        +31 6 23 55 52 81
                       </span>
                     </span>
                     <ArrowUpRight size={18} strokeWidth={1.6} />

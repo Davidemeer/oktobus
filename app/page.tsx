@@ -10,9 +10,8 @@ import { CapacityStrip } from '@/components/sections/capacity-strip';
 import { InkDrawDivider } from '@/components/sections/ink-draw-divider';
 import { TeamCard } from '@/components/sections/team-card';
 import { Marquee } from '@/components/sections/marquee';
-import { Pullquote } from '@/components/sections/pullquote';
 
-const INTAKE_HREF = '/contact';
+const INTAKE_HREF = '/contact#intake';
 
 export default function HomePage() {
   return (
@@ -22,9 +21,8 @@ export default function HomePage() {
         <Container className="pt-20 sm:pt-24 pb-24 sm:pb-32">
           {/* Index marker */}
           <RiseIn>
-            <div className="flex items-center gap-4 mb-12 sm:mb-16">
+            <div className="flex items-center justify-between gap-4 mb-12 sm:mb-16">
               <Num>§ 001 — INDEX</Num>
-              <Hairline className="flex-1" />
               <Num>AMSTERDAM · EST. 2026</Num>
             </div>
           </RiseIn>
@@ -66,7 +64,7 @@ export default function HomePage() {
                 <Hairline className="my-6" />
                 <Num>→ 002 / BELOFTE</Num>
                 <p className="text-[14px] leading-[1.65] mt-3 max-w-[260px]">
-                  Wij bouwen maatwerk software voor het MKB — met AI als bouwsteen, niet als feature.
+                  Wij bouwen maatwerk software — met AI als bouwsteen, niet als feature.
                   Sneller dan een traditioneel bureau. Slimmer dan de zoveelste abonnement-tool.
                 </p>
                 <div className="mt-8 flex flex-col gap-3 items-stretch">
@@ -97,7 +95,7 @@ export default function HomePage() {
             <div className="mt-20 sm:mt-24">
               <CapacityStrip
                 cells={[
-                  { label: '→ Capaciteit', value: '2', sub: 'projecten / kwartaal' },
+                  { label: '→ Capaciteit', value: '3', sub: 'projecten / kwartaal' },
                   { label: '→ Tijd tot live', value: '6–12', sub: 'weken' },
                   { label: '→ Overdracht', value: '100%', sub: 'eigen code' },
                   { label: '→ Volgend slot', value: 'Q3 ’26', pulse: true },
@@ -139,13 +137,31 @@ export default function HomePage() {
 
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-12 sm:mt-16">
                 <RiseIn delay={0.15}>
-                  <TeamCard number="01" role="Product" name="Jochem" discipline="Product & strategie" />
+                  <TeamCard
+                    number="01"
+                    role="Product"
+                    name="Jochem"
+                    discipline="Product & strategie"
+                    imgSrc="/team/jochem.jpg"
+                  />
                 </RiseIn>
                 <RiseIn delay={0.22}>
-                  <TeamCard number="02" role="Design" name="David" discipline="Design & interface" />
+                  <TeamCard
+                    number="02"
+                    role="Design"
+                    name="David"
+                    discipline="Design & interface"
+                    imgSrc="/team/david.jpg"
+                  />
                 </RiseIn>
                 <RiseIn delay={0.29}>
-                  <TeamCard number="03" role="Engineering" name="Max" discipline="Engineering & AI" />
+                  <TeamCard
+                    number="03"
+                    role="Engineering"
+                    name="Max"
+                    discipline="Engineering & AI"
+                    imgSrc="/team/max.jpg"
+                  />
                 </RiseIn>
               </div>
             </div>
@@ -159,7 +175,7 @@ export default function HomePage() {
           'Maatwerk boven abonnement',
           'Production-ready, geen demo',
           'AI als bouwsteen',
-          'MKB-budget, geen bureauprijs',
+          'Eerlijke prijs, geen bureau-prijs',
           'Geen tussenlagen',
           'Weken, geen maanden',
         ]}
@@ -211,7 +227,7 @@ export default function HomePage() {
                     </svg>
                   </span>
                 </div>
-                <h3 className="ptitle">MKB-budget, geen bureau-prijs</h3>
+                <h3 className="ptitle">Eerlijke prijs, geen bureau-prijs</h3>
                 <p className="text-[14.5px] leading-[1.65] text-ink-2 mt-3.5">
                   Wat bij een traditioneel bureau €200k en zes maanden kost, leveren wij in weken
                   tegen een fractie.
@@ -317,12 +333,6 @@ export default function HomePage() {
           </div>
         </Container>
       </section>
-
-      {/* ============================ PULLQUOTE ============================ */}
-      <Pullquote attribution="Werkwijze · pijler 02">
-        AI typt snel. Wij denken voor. Dat verschil merk je niet op dag 1 — dat merk je als je systeem
-        drie jaar later nog net zo soepel draait.
-      </Pullquote>
 
       {/* ============================ CONTACT CTA (dark) ============================ */}
       <section className="bg-ink text-bone">

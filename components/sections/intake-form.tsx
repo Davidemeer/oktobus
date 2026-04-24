@@ -1,7 +1,8 @@
 'use client';
 
-import { useState, type FormEvent } from 'react';
+import { useActionState, useState } from 'react';
 import { ArrowRight } from 'lucide-react';
+import { submitIntake, type IntakeState } from '@/lib/actions/intake';
 
 const TAGS = [
   'Workflow-tool',
@@ -20,14 +21,11 @@ const TIMELINE_OPTIONS = [
   'Weet ik nog niet',
 ] as const;
 
-/**
- * Non-functional intake form (mirrors HTML reference). On submit shows
- * a confirmation message — no email, no API. Real submission can be wired
- * later via a Server Action + Resend.
- */
+const INITIAL: IntakeState = { status: 'idle' };
+
 export function IntakeForm() {
   const [selected, setSelected] = useState<Set<string>>(new Set());
-  const [submitted, setSubmitted] = useState(false);
+  const [state, action, pending] = useActionState(submitIntake, INITIAL);
 
   function toggleTag(tag: string) {
     setSelected((prev) => {
@@ -38,12 +36,7 @@ export function IntakeForm() {
     });
   }
 
-  function handleSubmit(e: FormEvent) {
-    e.preventDefault();
-    setSubmitted(true);
-  }
-
-  if (submitted) {
+  if (state.status === 'success') {
     return (
       <div className="bento p-8">
         <div className="num mb-3">→ VERZONDEN</div>
@@ -58,22 +51,35 @@ export function IntakeForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} noValidate>
+    <form action={action}>
       <div className="num mb-6">§ 003 — INTAKE · 30 MIN</div>
 
       <div className="form-field">
         <label htmlFor="naam">→ Naam</label>
-        <input id="naam" type="text" placeholder="Je naam" autoComplete="name" />
+        <input id="naam" name="naam" type="text" required placeholder="Je naam" autoComplete="name" />
       </div>
 
       <div className="form-field">
         <label htmlFor="bedrijf">→ Bedrijf</label>
-        <input id="bedrijf" type="text" placeholder="Bedrijfsnaam · branche" autoComplete="organization" />
+        <input
+          id="bedrijf"
+          name="bedrijf"
+          type="text"
+          placeholder="Bedrijfsnaam · branche"
+          autoComplete="organization"
+        />
       </div>
 
       <div className="form-field">
         <label htmlFor="email">→ E-mail</label>
-        <input id="email" type="email" placeholder="jij@bedrijf.com" autoComplete="email" />
+        <input
+          id="email"
+          name="email"
+          type="email"
+          required
+          placeholder="jij@bedrijf.com"
+          autoComplete="email"
+        />
       </div>
 
       <div className="form-field">
@@ -95,11 +101,14 @@ export function IntakeForm() {
             );
           })}
         </div>
+        {Array.from(selected).map((tag) => (
+          <input key={tag} type="hidden" name="tags" value={tag} />
+        ))}
       </div>
 
       <div className="form-field">
-        <label htmlFor="when">→ Wanneer moet het live zijn?</label>
-        <select id="when" defaultValue={TIMELINE_OPTIONS[0]}>
+        <label htmlFor="timeline">→ Wanneer moet het live zijn?</label>
+        <select id="timeline" name="timeline" defaultValue={TIMELINE_OPTIONS[0]}>
           {TIMELINE_OPTIONS.map((o) => (
             <option key={o}>{o}</option>
           ))}
@@ -108,8 +117,29 @@ export function IntakeForm() {
 
       <div className="form-field">
         <label htmlFor="bericht">→ Korte context</label>
-        <textarea id="bericht" rows={4} placeholder="Waar loopt het vast? Wat probeer je op te lossen?" />
+        <textarea
+          id="bericht"
+          name="bericht"
+          rows={4}
+          placeholder="Waar loopt het vast? Wat probeer je op te lossen?"
+        />
       </div>
+
+      {/* Honeypot — bots fill it, humans can't see it. */}
+      <div aria-hidden="true" style={{ position: 'absolute', left: '-9999px', top: '-9999px' }}>
+        <label htmlFor="website">Laat dit veld leeg</label>
+        <input id="website" name="website" type="text" tabIndex={-1} autoComplete="off" />
+      </div>
+
+      {state.status === 'error' && (
+        <div
+          role="alert"
+          className="num mt-6 px-4 py-3 border border-[color:var(--color-line)] bg-paper text-ink"
+          style={{ color: 'var(--color-warn, #B0541F)' }}
+        >
+          → {state.message}
+        </div>
+      )}
 
       <div className="flex items-center justify-between mt-9 gap-6 flex-wrap">
         <div className="num max-w-[420px] leading-[1.65]">
@@ -117,10 +147,11 @@ export function IntakeForm() {
         </div>
         <button
           type="submit"
-          className="btn-primary inline-flex items-center gap-2 px-7 py-4 rounded-full text-[15px]"
+          disabled={pending}
+          className="btn-primary inline-flex items-center gap-2 px-7 py-4 rounded-full text-[15px] disabled:opacity-60 disabled:cursor-not-allowed"
         >
-          Verstuur intake
-          <ArrowRight size={14} strokeWidth={1.8} />
+          {pending ? 'Versturen…' : 'Verstuur intake'}
+          {!pending && <ArrowRight size={14} strokeWidth={1.8} />}
         </button>
       </div>
     </form>

@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import { ArrowRight } from 'lucide-react';
 import { Container } from '@/components/layout/container';
-import { Hairline } from '@/components/ui/hairline';
 import { Num } from '@/components/ui/num';
 import { Button } from '@/components/ui/button';
 import { RiseIn } from '@/components/motion/rise-in';
@@ -19,7 +18,7 @@ export const metadata: Metadata = {
     'Drie pijlers: een eigen bouwstraat, diepe software-kennis, builders met product- en strategiegevoel.',
 };
 
-const INTAKE_HREF = '/contact';
+const INTAKE_HREF = '/contact#intake';
 
 export default function WerkwijzePage() {
   return (
@@ -27,14 +26,6 @@ export default function WerkwijzePage() {
       {/* ============================ HERO ============================ */}
       <section>
         <Container className="pt-20 sm:pt-24 pb-20">
-          <RiseIn>
-            <div className="flex items-center gap-4 mb-16 sm:mb-20">
-              <Num>§ WERKWIJZE — P. 03</Num>
-              <Hairline className="flex-1" />
-              <Num>DRIE PIJLERS</Num>
-            </div>
-          </RiseIn>
-
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-end">
             <div className="lg:col-span-5">
               <RiseIn>
@@ -243,7 +234,7 @@ export default function WerkwijzePage() {
             </RiseIn>
             <RiseIn delay={0.1}>
               <p className="text-[14px] leading-[1.65] text-ink-2 max-w-[380px] pb-3">
-                Indicatief voor een MKB-project op onze bouwstraat. Afhankelijk van scope en
+                Indicatief voor een typisch project op onze bouwstraat. Afhankelijk van scope en
                 koppelingen — maar nooit een half jaar waarin je niks te zien krijgt.
               </p>
             </RiseIn>
@@ -284,7 +275,7 @@ export default function WerkwijzePage() {
                   className="text-[17px] leading-[1.65] mt-6 max-w-[580px]"
                   style={{ color: '#F3EFE9AA' }}
                 >
-                  Dat is waarom Oktobus werkt — en waarom maatwerk voor het MKB nu eindelijk kan.
+                  Dat is waarom Oktobus werkt — en waarom maatwerk nu eindelijk binnen handbereik ligt.
                 </p>
                 <FadeIn delay={0.2}>
                   <VennSamenhang />

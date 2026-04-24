@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import { ArrowRight, Check } from 'lucide-react';
 import { Container } from '@/components/layout/container';
-import { Hairline } from '@/components/ui/hairline';
 import { Num } from '@/components/ui/num';
 import { Button } from '@/components/ui/button';
 import { RiseIn } from '@/components/motion/rise-in';
@@ -10,10 +9,10 @@ import { FadeIn } from '@/components/motion/fade-in';
 export const metadata: Metadata = {
   title: 'Belofte',
   description:
-    'Maatwerk, geen compromissen. MKB-budget, geen bureau-prijs. Werkende software, geen prototype met plakband.',
+    'Maatwerk, geen compromissen. Eerlijke prijs, geen bureau-prijs. Werkende software, geen prototype met plakband.',
 };
 
-const INTAKE_HREF = '/contact';
+const INTAKE_HREF = '/contact#intake';
 
 const READY_CHECKS = [
   'Auth & rechten',
@@ -37,14 +36,6 @@ export default function BeloftePage() {
       {/* ============================ HERO ============================ */}
       <section>
         <Container className="pt-20 sm:pt-24 pb-20">
-          <RiseIn>
-            <div className="flex items-center gap-4 mb-16 sm:mb-20">
-              <Num>§ BELOFTE — P. 02</Num>
-              <Hairline className="flex-1" />
-              <Num>LEESTIJD · 3 MIN</Num>
-            </div>
-          </RiseIn>
-
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
             <div className="lg:col-span-5">
               <RiseIn>
@@ -58,12 +49,12 @@ export default function BeloftePage() {
             <div className="lg:col-span-7 lg:pt-7">
               <RiseIn delay={0.1}>
                 <p className="text-[clamp(20px,2.5vw,28px)] leading-[1.35] tracking-[-0.02em] max-w-[640px]">
-                  Het MKB betaalt zich suf aan tien abonnementen die elk voor 80% passen. Een
-                  traditioneel softwarebureau inhuren kost €100k+ en duurt maanden.
+                  Bedrijven betalen zich suf aan tien abonnementen die elk voor 80% passen. Een
+                  traditioneel softwarebureau inhuren kost €200k+ en duurt maanden.
                 </p>
                 <p className="text-[clamp(20px,2.5vw,28px)] leading-[1.35] tracking-[-0.02em] max-w-[640px] mt-6">
                   <span className="text-teal-ink">Wij zitten daartussen.</span> Maatwerk in weken,
-                  tegen een budget dat past bij het MKB, op basis van hoe jouw werk écht gaat.
+                  tegen een budget dat werkt, op basis van hoe jouw werk écht gaat.
                 </p>
               </RiseIn>
 
@@ -75,7 +66,7 @@ export default function BeloftePage() {
                   </span>
                   <span className="tag">
                     <span className="dot" />
-                    02 · MKB-budget
+                    02 · Eerlijke prijs
                   </span>
                   <span className="tag">
                     <span className="dot" />
@@ -150,12 +141,12 @@ export default function BeloftePage() {
               </div>
               <div className="lg:col-span-5">
                 <h2 className="display text-[clamp(32px,4.5vw,48px)] leading-[1.05] tracking-[-0.035em] m-0">
-                  MKB-budget,<br />geen bureau-prijs.
+                  Eerlijke prijs,<br />geen bureau-prijs.
                 </h2>
               </div>
               <div className="lg:col-span-5">
                 <p className="text-[17px] leading-[1.65] text-ink m-0">
-                  Twee jaar geleden was maatwerk voor het MKB niet rendabel. AI-kosten zijn
+                  Twee jaar geleden was maatwerk op deze schaal niet rendabel. AI-kosten zijn
                   gekelderd en moderne dev-tools hebben onze bouwsnelheid vertienvoudigd. Wat zes
                   maanden en €200k kostte, bouwen wij in weken binnen een budget dat werkt.
                   <sup className="text-teal-ink font-mono text-[10px]">²</sup>
@@ -190,7 +181,7 @@ export default function BeloftePage() {
 
           {/* Promise 03 */}
           <RiseIn>
-            <article className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 py-16 border-block border-[color:var(--color-line)]" style={{ borderTop: '1px solid var(--color-line)', borderBottom: '1px solid var(--color-line)' }}>
+            <article className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 py-16 border-t border-[color:var(--color-line)]">
               <div className="lg:col-span-2">
                 <div className="display text-[clamp(72px,9vw,110px)] leading-[0.9] tracking-[-0.05em]">
                   03
@@ -258,7 +249,7 @@ export default function BeloftePage() {
                   Voor wie dit<br />werkt.
                 </h2>
                 <p className="text-[16px] leading-[1.65] text-ink-2 mt-6 max-w-[400px]">
-                  Oktobus is er voor MKB-bedrijven die vastlopen op standaard software. Je herkent
+                  Oktobus is er voor bedrijven die vastlopen op standaard software. Je herkent
                   het als:
                 </p>
               </RiseIn>
