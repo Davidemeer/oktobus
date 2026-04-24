@@ -1,24 +1,18 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import { Container } from '@/components/layout/container';
+import { Hairline } from '@/components/ui/hairline';
 import { Num } from '@/components/ui/num';
-import { Button } from '@/components/ui/button';
 import { RiseIn } from '@/components/motion/rise-in';
-import { FadeIn } from '@/components/motion/fade-in';
-import { IndexTOC } from '@/components/sections/index-toc';
-import { BouwstenenGrid } from '@/components/sections/bouwstenen-grid';
-import { DayChart } from '@/components/sections/day-chart';
-import { ChainDiagram } from '@/components/sections/chain-diagram';
-import { Timeline } from '@/components/sections/timeline';
-import { VennSamenhang } from '@/components/sections/venn-samenhang';
 
 export const metadata: Metadata = {
   title: 'Werkwijze',
   description:
-    'Drie pijlers: een eigen bouwstraat, diepe software-kennis, builders met product- en strategiegevoel.',
+    'Twee diamanten. Van vraag naar versie 1.0 — eerst begrijpen, dan bouwen, met twee scherpe mijlpalen ertussen.',
 };
 
-const INTAKE_HREF = '/contact#intake';
+const CONTACT_HREF = '/over-ons#contact';
 
 export default function WerkwijzePage() {
   return (
@@ -26,260 +20,360 @@ export default function WerkwijzePage() {
       {/* ============================ HERO ============================ */}
       <section>
         <Container className="pt-20 sm:pt-24 pb-20">
+          <RiseIn>
+            <div className="flex items-center gap-4 mb-16 sm:mb-20">
+              <Num>§ WERKWIJZE — P. 02</Num>
+              <Hairline className="flex-1" />
+              <Num>DOUBLE DIAMOND · OKTOBUS</Num>
+            </div>
+          </RiseIn>
+
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-end">
             <div className="lg:col-span-5">
               <RiseIn>
                 <Num className="block mb-3.5">§ 001 — INTRO</Num>
-                <h1 className="display text-[clamp(64px,11vw,120px)] leading-[0.98] tracking-[-0.05em] m-0">
-                  Zo<br />
-                  <span className="text-teal-ink">bouwen we.</span>
+                <h1 className="display text-[clamp(56px,10vw,120px)] leading-[0.98] tracking-[-0.05em] m-0">
+                  Twee<br />
+                  <span className="text-teal-ink">diamanten.</span>
                 </h1>
               </RiseIn>
             </div>
             <div className="lg:col-span-7 lg:pb-4">
               <RiseIn delay={0.1}>
-                <p className="text-[clamp(18px,2.2vw,24px)] leading-[1.4] tracking-[-0.018em] max-w-[620px]">
-                  Snelheid zonder kwaliteitsverlies komt niet uit trucjes. Het komt uit drie dingen
-                  die we goed hebben geregeld: een{' '}
-                  <span className="text-teal-ink">bouwstraat</span> die klaarstaat, diepe{' '}
-                  <span className="text-teal-ink">software-kennis</span>, en een{' '}
-                  <span className="text-teal-ink">team</span> dat verder denkt dan de code.
+                <p className="text-[clamp(18px,2vw,24px)] leading-[1.4] tracking-[-0.018em] max-w-[640px]">
+                  Elk project doorlopen we in twee bewegingen. Eerst{' '}
+                  <span className="text-teal-ink">begrijpen</span> — wat speelt er echt, voor
+                  wie bouwen we, wat gaan we níet maken. Daarna{' '}
+                  <span className="text-teal-ink">bouwen</span> — van prototype naar versie
+                  1.0 in productie.
                 </p>
                 <p className="text-[15px] leading-[1.65] text-ink-2 mt-5 max-w-[560px]">
-                  Hieronder wat dat concreet betekent.
+                  Twee scherpe mijlpalen. Daartussen ruimte om te verkennen, fouten te maken
+                  en bij te sturen.
                 </p>
               </RiseIn>
             </div>
           </div>
+        </Container>
+      </section>
 
-          {/* TOC */}
-          <RiseIn delay={0.2}>
-            <div className="mt-20">
-              <IndexTOC
-                entries={[
-                  {
-                    marker: '§ 002',
-                    title: 'We starten niet bij nul.',
-                    sub: 'Een bouwstraat die klaarstaat voor je begint.',
-                    badge: 'PIJLER · 01',
-                    href: '#pijler-01',
-                  },
-                  {
-                    marker: '§ 003',
-                    title: 'AI typt snel. Wij denken voor.',
-                    sub: 'Jaren bouwervaring van vóór AI bestond.',
-                    badge: 'PIJLER · 02',
-                    href: '#pijler-02',
-                  },
-                  {
-                    marker: '§ 004',
-                    title: 'Geen tussenlagen.',
-                    sub: 'Product, techniek en strategie in dezelfde hoofden.',
-                    badge: 'PIJLER · 03',
-                    href: '#pijler-03',
-                  },
-                ]}
-              />
+      {/* ============================ BIG DIAMOND OVERZICHT ============================ */}
+      <section className="bg-bone-2">
+        <Container className="pt-24 sm:pt-32 pb-24 sm:pb-32">
+          <RiseIn>
+            <Num className="block mb-6">§ 002 — OVERZICHT</Num>
+          </RiseIn>
+
+          <RiseIn delay={0.05}>
+            <div className="dd" style={{ padding: '48px 40px 32px' }}>
+              <svg
+                className="dd-svg"
+                viewBox="0 0 1200 420"
+                preserveAspectRatio="xMidYMid meet"
+                aria-hidden
+                style={{ maxHeight: 480 }}
+              >
+                <line
+                  x1="0"
+                  y1="210"
+                  x2="1200"
+                  y2="210"
+                  stroke="#0b0b0a"
+                  strokeOpacity="0.12"
+                  strokeDasharray="2 4"
+                />
+
+                <polygon
+                  points="80,210 340,60 600,210 340,360"
+                  fill="#51A397"
+                  fillOpacity="0.07"
+                  stroke="#0b0b0a"
+                  strokeWidth="1.3"
+                />
+                <polygon
+                  points="600,210 860,60 1120,210 860,360"
+                  fill="#51A397"
+                  fillOpacity="0.07"
+                  stroke="#0b0b0a"
+                  strokeWidth="1.3"
+                />
+
+                <path d="M120 210 Q 220 130 340 60" stroke="#2F6E66" strokeWidth="1" fill="none" strokeDasharray="3 3" />
+                <path d="M120 210 Q 220 290 340 360" stroke="#2F6E66" strokeWidth="1" fill="none" strokeDasharray="3 3" />
+                <path d="M340 60  Q 480 130 580 210" stroke="#2F6E66" strokeWidth="1" fill="none" strokeDasharray="3 3" />
+                <path d="M340 360 Q 480 290 580 210" stroke="#2F6E66" strokeWidth="1" fill="none" strokeDasharray="3 3" />
+                <path d="M640 210 Q 740 130 860 60" stroke="#2F6E66" strokeWidth="1" fill="none" strokeDasharray="3 3" />
+                <path d="M640 210 Q 740 290 860 360" stroke="#2F6E66" strokeWidth="1" fill="none" strokeDasharray="3 3" />
+                <path d="M860 60  Q 1000 130 1100 210" stroke="#2F6E66" strokeWidth="1" fill="none" strokeDasharray="3 3" />
+                <path d="M860 360 Q 1000 290 1100 210" stroke="#2F6E66" strokeWidth="1" fill="none" strokeDasharray="3 3" />
+
+                <circle cx="80" cy="210" r="6" fill="#0b0b0a" fillOpacity="0.4" />
+                <circle cx="600" cy="210" r="10" fill="#51A397" />
+                <circle cx="600" cy="210" r="18" fill="none" stroke="#51A397" strokeOpacity="0.35" />
+                <circle cx="1120" cy="210" r="10" fill="#0b0b0a" />
+                <circle cx="1120" cy="210" r="18" fill="none" stroke="#0b0b0a" strokeOpacity="0.3" />
+
+                <text x="340" y="30" textAnchor="middle" fontFamily="var(--font-geist-mono), monospace" fontSize="12" letterSpacing="2" fill="#63615C">
+                  DIAMANT 01 · BEGRIJPEN
+                </text>
+                <text x="860" y="30" textAnchor="middle" fontFamily="var(--font-geist-mono), monospace" fontSize="12" letterSpacing="2" fill="#63615C">
+                  DIAMANT 02 · BOUWEN
+                </text>
+
+                <text x="210" y="206" textAnchor="middle" fontFamily="var(--font-geist), sans-serif" fontWeight="500" fontSize="18" fill="#0B0B0A">
+                  Ontdekken
+                </text>
+                <text x="210" y="224" textAnchor="middle" fontFamily="var(--font-geist-mono), monospace" fontSize="10" fill="#63615C">
+                  divergeren · vragen stellen
+                </text>
+                <text x="470" y="206" textAnchor="middle" fontFamily="var(--font-geist), sans-serif" fontWeight="500" fontSize="18" fill="#0B0B0A">
+                  Definiëren
+                </text>
+                <text x="470" y="224" textAnchor="middle" fontFamily="var(--font-geist-mono), monospace" fontSize="10" fill="#63615C">
+                  convergeren · kritisch kiezen
+                </text>
+                <text x="730" y="206" textAnchor="middle" fontFamily="var(--font-geist), sans-serif" fontWeight="500" fontSize="18" fill="#0B0B0A">
+                  Prototypen
+                </text>
+                <text x="730" y="224" textAnchor="middle" fontFamily="var(--font-geist-mono), monospace" fontSize="10" fill="#63615C">
+                  divergeren · bouwen &amp; demo
+                </text>
+                <text x="990" y="206" textAnchor="middle" fontFamily="var(--font-geist), sans-serif" fontWeight="500" fontSize="18" fill="#0B0B0A">
+                  Uitleveren
+                </text>
+                <text x="990" y="224" textAnchor="middle" fontFamily="var(--font-geist-mono), monospace" fontSize="10" fill="#63615C">
+                  convergeren · robuust maken
+                </text>
+
+                <text x="80" y="50" textAnchor="middle" fontFamily="var(--font-geist-mono), monospace" fontSize="11" letterSpacing="1.5" fill="#63615C">
+                  → START · VRAAG
+                </text>
+                <text x="600" y="50" textAnchor="middle" fontFamily="var(--font-geist-mono), monospace" fontSize="11" letterSpacing="1.5" fill="#2F6E66">
+                  ◆ MIJLPAAL 01 · PROTOTYPE
+                </text>
+                <text x="1120" y="50" textAnchor="middle" fontFamily="var(--font-geist-mono), monospace" fontSize="11" letterSpacing="1.5" fill="#0B0B0A">
+                  ■ MIJLPAAL 02 · LIVE V1.0
+                </text>
+
+                <text x="340" y="400" textAnchor="middle" fontFamily="var(--font-geist-mono), monospace" fontSize="10.5" letterSpacing="1.5" fill="#63615C">
+                  MENSELIJKE KANT · LEREN · KRITISCH ZIJN OP HET PRODUCT
+                </text>
+                <text x="860" y="400" textAnchor="middle" fontFamily="var(--font-geist-mono), monospace" fontSize="10.5" letterSpacing="1.5" fill="#63615C">
+                  MAKENDE KANT · PROTOTYPES · ITERATIES · PRODUCTIE
+                </text>
+              </svg>
             </div>
           </RiseIn>
         </Container>
       </section>
 
-      {/* ============================ PIJLER 01 (bone-2) ============================ */}
-      <section id="pijler-01" className="bg-bone-2 scroll-mt-24">
-        <Container className="py-24 sm:py-32">
+      {/* ============================ DIAMOND 01 ============================ */}
+      <section>
+        <Container className="pt-28 sm:pt-32 pb-16">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
             <div className="lg:col-span-5">
               <RiseIn>
-                <Num className="block mb-3.5">§ 002 — PIJLER · 01</Num>
-                <div className="display text-[clamp(120px,18vw,200px)] leading-[0.88] tracking-[-0.05em]">
+                <Num className="block mb-3.5">§ 003 — DIAMANT · 01</Num>
+                <div className="display text-[clamp(120px,16vw,180px)] leading-[0.88] tracking-[-0.05em] text-ink">
                   01
                 </div>
-                <h2 className="display text-[clamp(36px,5vw,52px)] leading-[1.02] tracking-[-0.035em] mt-8">
-                  We starten<br />niet bij nul.
+                <h2 className="display text-[clamp(40px,5vw,52px)] leading-[1.02] tracking-[-0.035em] mt-7">
+                  Begrijpen<br />voor we bouwen.
                 </h2>
-                <p className="num mt-4 text-teal-ink">→ EEN BOUWSTRAAT DIE KLAARSTAAT.</p>
+                <Num className="block mt-5 text-teal-ink">→ DE MENSELIJKE KANT.</Num>
+                <p className="text-[16px] leading-[1.65] mt-6 max-w-[420px]">
+                  We komen langs. We gaan zitten met de mensen die straks met het product
+                  werken. We vragen door tot we weten wat er écht speelt — niet wat er in de
+                  offerte stond.
+                </p>
               </RiseIn>
             </div>
+
             <div className="lg:col-span-7">
               <RiseIn delay={0.1}>
-                <p className="text-[18px] leading-[1.65] text-ink m-0">
-                  De dingen die in elk softwareproject terugkomen — inlog, rechten, gebruikersbeheer,
-                  ERP-koppelingen, AI-integraties, security, deployment — hebben wij als
-                  herbruikbare bouwstenen klaar staan. Plus automatische kwaliteitschecks die bij
-                  elke wijziging draaien en bewezen architectuurpatronen die we niet elk project
-                  opnieuw uitvinden.
-                </p>
-                <p className="text-[18px] leading-[1.65] text-ink mt-6">
-                  Waar een traditioneel bureau de eerste weken nog aan fundamenten bouwt, leveren
-                  wij dan al werkende functionaliteit op. Bij de nieuwsredactie die wij hielpen stond
-                  het scraping- en AI-beoordelingsfundament{' '}
-                  <span className="text-teal-ink">binnen een week</span> — omdat het grotendeels
-                  dezelfde architectuur is die we vaker hebben neergezet. De tijd die je uitspaart op
-                  het standaardwerk, steken wij in wat jouw bedrijf uniek maakt.
-                </p>
-              </RiseIn>
+                <article className="grid grid-cols-[120px_1fr] gap-8 border-t border-[color:var(--color-line)] py-8">
+                  <div>
+                    <Num className="block mb-2.5">FASE · 01</Num>
+                    <div className="display text-[clamp(32px,4vw,44px)] leading-[0.9] tracking-[-0.04em]">
+                      ◇
+                    </div>
+                  </div>
+                  <div>
+                    <h3 className="display text-[clamp(26px,3vw,34px)] tracking-[-0.03em] leading-[1.05] m-0">
+                      Ontdekken
+                    </h3>
+                    <p className="text-[15.5px] leading-[1.65] mt-3.5 max-w-[620px]">
+                      Divergeren. We verbreden bewust: wie gebruikt dit, waar loopt het
+                      vast, wat is er al geprobeerd. We zijn kritisch op de vraag zelf —
+                      soms is wat er gevraagd wordt niet wat er nodig is.
+                    </p>
+                    <ul className="mt-4 flex flex-wrap gap-2">
+                      <li className="tag"><span className="dot" />Gesprekken met gebruikers</li>
+                      <li className="tag"><span className="dot" />Proces-observatie</li>
+                      <li className="tag"><span className="dot" />Systeemlandschap mappen</li>
+                      <li className="tag"><span className="dot" />Vraag achter de vraag</li>
+                    </ul>
+                  </div>
+                </article>
 
-              <FadeIn delay={0.2}>
-                <div className="mt-12">
-                  <BouwstenenGrid />
-                </div>
-              </FadeIn>
+                <article className="grid grid-cols-[120px_1fr] gap-8 border-t border-[color:var(--color-line)] py-8">
+                  <div>
+                    <Num className="block mb-2.5">FASE · 02</Num>
+                    <div className="display text-[clamp(32px,4vw,44px)] leading-[0.9] tracking-[-0.04em]">
+                      ◆
+                    </div>
+                  </div>
+                  <div>
+                    <h3 className="display text-[clamp(26px,3vw,34px)] tracking-[-0.03em] leading-[1.05] m-0">
+                      Definiëren
+                    </h3>
+                    <p className="text-[15.5px] leading-[1.65] mt-3.5 max-w-[620px]">
+                      Convergeren. We smallen af naar één heldere opdracht. Wat bouwen we
+                      wel, wat níet. Welke functionaliteit moet er eerst zijn, waar ligt de
+                      grens van versie 1.
+                    </p>
+                    <ul className="mt-4 flex flex-wrap gap-2">
+                      <li className="tag"><span className="dot" />Scope-document</li>
+                      <li className="tag"><span className="dot" />Gebruikersreis</li>
+                      <li className="tag"><span className="dot" />Architectuur op A4</li>
+                      <li className="tag"><span className="dot" />Wat laten we weg</li>
+                    </ul>
+                  </div>
+                </article>
+
+                <article
+                  className="grid grid-cols-[120px_1fr] gap-8 py-8"
+                  style={{
+                    borderTop: '1px solid var(--color-teal)',
+                    borderBottom: '1px solid var(--color-teal)',
+                    background:
+                      'linear-gradient(90deg, rgba(81,163,151,0.06), transparent 70%)',
+                  }}
+                >
+                  <div>
+                    <Num className="block mb-2.5 text-teal-ink">MIJLPAAL · 01</Num>
+                    <div className="display text-[clamp(32px,4vw,44px)] leading-[0.9] tracking-[-0.04em] text-teal-ink">
+                      ◆
+                    </div>
+                  </div>
+                  <div>
+                    <h3 className="display text-[clamp(26px,3vw,34px)] tracking-[-0.03em] leading-[1.05] m-0 text-teal-ink">
+                      Prototype
+                    </h3>
+                    <p className="text-[15.5px] leading-[1.65] mt-3.5 max-w-[620px]">
+                      Werkend, klikbaar, met echte data waar dat kan. Iets om aan te wijzen
+                      en te verbeteren — geen slide, geen mockup. Hier eindigt diamant 01 en
+                      begint de bouwfase.
+                    </p>
+                  </div>
+                </article>
+              </RiseIn>
             </div>
           </div>
         </Container>
       </section>
 
-      {/* ============================ PIJLER 02 ============================ */}
-      <section id="pijler-02" className="scroll-mt-24">
-        <Container className="py-24 sm:py-32">
+      {/* ============================ DIAMOND 02 ============================ */}
+      <section className="bg-bone-2">
+        <Container className="pt-28 sm:pt-32 pb-28 sm:pb-32">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
             <div className="lg:col-span-5">
               <RiseIn>
-                <Num className="block mb-3.5">§ 003 — PIJLER · 02</Num>
-                <div className="display text-[clamp(120px,18vw,200px)] leading-[0.88] tracking-[-0.05em]">
+                <Num className="block mb-3.5">§ 004 — DIAMANT · 02</Num>
+                <div className="display text-[clamp(120px,16vw,180px)] leading-[0.88] tracking-[-0.05em] text-ink">
                   02
                 </div>
-                <h2 className="display text-[clamp(36px,5vw,52px)] leading-[1.02] tracking-[-0.035em] mt-8">
-                  AI typt snel.<br />Wij denken voor.
+                <h2 className="display text-[clamp(40px,5vw,52px)] leading-[1.02] tracking-[-0.035em] mt-7">
+                  Bouwen<br />tot het staat.
                 </h2>
-                <p className="num mt-4 text-teal-ink">→ JAREN BOUWERVARING VÓÓR AI.</p>
+                <Num className="block mt-5 text-teal-ink">→ DE MAKENDE KANT.</Num>
+                <p className="text-[16px] leading-[1.65] mt-6 max-w-[420px]">
+                  Van prototype naar product. Iteraties om de twee weken, steeds robuuster,
+                  steeds dichter bij productie. Geen big-bang oplevering — we bouwen in het
+                  licht.
+                </p>
               </RiseIn>
             </div>
+
             <div className="lg:col-span-7">
               <RiseIn delay={0.1}>
-                <p className="text-[18px] leading-[1.65] text-ink m-0">
-                  In 2026 kan iedereen met een AI-tool iets in elkaar klikken dat werkt op een demo.
-                  De vraag is niet of het werkt op dag 1. De vraag is of het werkt op{' '}
-                  <span className="text-teal-ink">dag 1000</span>. Welke database past bij jouw
-                  datavolumes. Waar mag je een shortcut nemen en waar absoluut niet. Of je software
-                  over twee jaar nog mee kan als je bedrijf groeit.
-                </p>
-                <p className="text-[18px] leading-[1.65] text-ink mt-6">
-                  Wij hebben jarenlang gebouwd voordat AI bestond. Dat verschil merk je niet op de
-                  eerste oplevering — dat merk je als je systeem drie jaar later nog net zo soepel
-                  draait. Bij het aannemersbedrijf betekende dat een ERP-koppeling die meegroeit als
-                  ze nieuwe vestigingen openen, niet een integratie die bij elke update omvalt.{' '}
-                  <span className="text-teal-ink">AI versnelt het typen. Het denken blijft mensenwerk.</span>
-                </p>
-              </RiseIn>
+                <article className="grid grid-cols-[120px_1fr] gap-8 border-t border-[color:var(--color-line)] py-8">
+                  <div>
+                    <Num className="block mb-2.5">FASE · 03</Num>
+                    <div className="display text-[clamp(32px,4vw,44px)] leading-[0.9] tracking-[-0.04em]">
+                      ◇
+                    </div>
+                  </div>
+                  <div>
+                    <h3 className="display text-[clamp(26px,3vw,34px)] tracking-[-0.03em] leading-[1.05] m-0">
+                      Prototypen
+                    </h3>
+                    <p className="text-[15.5px] leading-[1.65] mt-3.5 max-w-[620px]">
+                      Divergeren. We verkennen oplossingen in werkende code. Twee varianten
+                      naast elkaar is vaak sneller dan eindeloos kiezen op papier. Demo per
+                      2–3 dagen.
+                    </p>
+                    <ul className="mt-4 flex flex-wrap gap-2">
+                      <li className="tag"><span className="dot" />Werkende branches</li>
+                      <li className="tag"><span className="dot" />Demo per sprint</li>
+                      <li className="tag"><span className="dot" />Feedback-loops kort</li>
+                      <li className="tag"><span className="dot" />Echte data in test</li>
+                    </ul>
+                  </div>
+                </article>
 
-              <FadeIn delay={0.2}>
-                <div className="mt-12">
-                  <DayChart />
-                </div>
-              </FadeIn>
-            </div>
-          </div>
-        </Container>
-      </section>
+                <article className="grid grid-cols-[120px_1fr] gap-8 border-t border-[color:var(--color-line)] py-8">
+                  <div>
+                    <Num className="block mb-2.5">FASE · 04</Num>
+                    <div className="display text-[clamp(32px,4vw,44px)] leading-[0.9] tracking-[-0.04em]">
+                      ◆
+                    </div>
+                  </div>
+                  <div>
+                    <h3 className="display text-[clamp(26px,3vw,34px)] tracking-[-0.03em] leading-[1.05] m-0">
+                      Uitleveren
+                    </h3>
+                    <p className="text-[15.5px] leading-[1.65] mt-3.5 max-w-[620px]">
+                      Convergeren. We maken het af en robuust: evals, guardrails, security,
+                      migraties, backups. Prestaties op echte load. Observability staat
+                      voordat de eerste gebruiker erop komt.
+                    </p>
+                    <ul className="mt-4 flex flex-wrap gap-2">
+                      <li className="tag"><span className="dot" />Evals &amp; guardrails</li>
+                      <li className="tag"><span className="dot" />Security-hardening</li>
+                      <li className="tag"><span className="dot" />Database-migraties</li>
+                      <li className="tag"><span className="dot" />Observability</li>
+                      <li className="tag"><span className="dot" />Load-tests</li>
+                    </ul>
+                  </div>
+                </article>
 
-      {/* ============================ PIJLER 03 (bone-2) ============================ */}
-      <section id="pijler-03" className="bg-bone-2 scroll-mt-24">
-        <Container className="py-24 sm:py-32">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
-            <div className="lg:col-span-5">
-              <RiseIn>
-                <Num className="block mb-3.5">§ 004 — PIJLER · 03</Num>
-                <div className="display text-[clamp(120px,18vw,200px)] leading-[0.88] tracking-[-0.05em]">
-                  03
-                </div>
-                <h2 className="display text-[clamp(36px,5vw,52px)] leading-[1.02] tracking-[-0.035em] mt-8">
-                  Geen tussenlagen,<br />geen vertaalverlies.
-                </h2>
-                <p className="num mt-4 text-teal-ink">→ PRODUCT · TECHNIEK · STRATEGIE.</p>
-              </RiseIn>
-            </div>
-            <div className="lg:col-span-7">
-              <RiseIn delay={0.1}>
-                <p className="text-[18px] leading-[1.65] text-ink m-0">
-                  De meeste softwareprojecten falen niet op de techniek. Ze falen omdat het verkeerde
-                  gebouwd is. Bij een traditioneel bureau praat je met een accountmanager, die praat
-                  met een projectmanager, die praat met een developer. Bij elke vertaalslag verdwijnt
-                  context. Bij ons praat je direct met de mensen die bouwen — en die denken mee over
-                  wat je écht nodig hebt, welke functionaliteit eerst moet, en hoe dit past in je
-                  bredere ICT-landschap over drie jaar.
-                </p>
-                <p className="text-[18px] leading-[1.65] text-ink mt-6">
-                  Bij de camperverhuur die we hielpen was de vraag oorspronkelijk{' '}
-                  <span className="text-teal-ink">&ldquo;bouw een boekingssysteem.&rdquo;</span> Wat
-                  ze nodig hadden was{' '}
-                  <span className="text-teal-ink">Google-vindbaarheid</span> — het boekingssysteem
-                  was niet de bottleneck. Dat soort keuzes maak je niet in een specificatiedocument.
-                  Die maak je in gesprek met iemand die én de business snapt, én weet wat bouwen
-                  kost, én ziet waar het over drie jaar heen moet.
-                </p>
-              </RiseIn>
-
-              <FadeIn delay={0.2}>
-                <div className="mt-12">
-                  <ChainDiagram />
-                </div>
-              </FadeIn>
-            </div>
-          </div>
-        </Container>
-      </section>
-
-      {/* ============================ TIMELINE ============================ */}
-      <section>
-        <Container className="py-24 sm:py-32">
-          <div className="flex justify-between items-end mb-12 sm:mb-16 flex-wrap gap-6">
-            <RiseIn>
-              <Num className="block mb-3.5">§ 005 — TIJDLIJN</Num>
-              <h2 className="display text-[clamp(40px,5.5vw,64px)] leading-[1.02] tracking-[-0.04em] m-0">
-                Week 1 tot week 6.<br />
-                <span className="text-ink-2">Niet zes maanden.</span>
-              </h2>
-            </RiseIn>
-            <RiseIn delay={0.1}>
-              <p className="text-[14px] leading-[1.65] text-ink-2 max-w-[380px] pb-3">
-                Indicatief voor een typisch project op onze bouwstraat. Afhankelijk van scope en
-                koppelingen — maar nooit een half jaar waarin je niks te zien krijgt.
-              </p>
-            </RiseIn>
-          </div>
-
-          <FadeIn delay={0.15}>
-            <Timeline />
-          </FadeIn>
-        </Container>
-      </section>
-
-      {/* ============================ SAMENHANG (dark) ============================ */}
-      <section className="bg-ink text-bone">
-        <Container className="py-32 sm:py-36">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
-            <div className="lg:col-span-5">
-              <RiseIn>
-                <span className="font-mono text-[10.5px] tracking-[0.08em] mb-3.5 block" style={{ color: '#F3EFE966' }}>
-                  § 006 — SAMENHANG
-                </span>
-                <h2 className="display text-[clamp(48px,6.5vw,80px)] leading-[1] tracking-[-0.045em] m-0 text-bone">
-                  De drie<br />samen.
-                </h2>
-              </RiseIn>
-            </div>
-            <div className="lg:col-span-7">
-              <RiseIn delay={0.1}>
-                <p
-                  className="text-[clamp(18px,2.2vw,24px)] leading-[1.45] tracking-[-0.018em] max-w-[620px]"
-                  style={{ color: '#F3EFE9E0' }}
+                <article
+                  className="grid grid-cols-[120px_1fr] gap-8 py-8"
+                  style={{
+                    borderTop: '1px solid var(--color-ink)',
+                    borderBottom: '1px solid var(--color-ink)',
+                    background:
+                      'linear-gradient(90deg, rgba(11,11,10,0.05), transparent 70%)',
+                  }}
                 >
-                  De bouwstraat geeft <span className="text-teal">snelheid</span>. De kennis geeft{' '}
-                  <span className="text-teal">kwaliteit</span>. De builders zorgen dat het{' '}
-                  <span className="text-teal">juiste</span> gebouwd wordt. Eén zonder de andere twee
-                  levert niet op wat wij beloven.
-                </p>
-                <p
-                  className="text-[17px] leading-[1.65] mt-6 max-w-[580px]"
-                  style={{ color: '#F3EFE9AA' }}
-                >
-                  Dat is waarom Oktobus werkt — en waarom maatwerk nu eindelijk binnen handbereik ligt.
-                </p>
-                <FadeIn delay={0.2}>
-                  <VennSamenhang />
-                </FadeIn>
+                  <div>
+                    <Num className="block mb-2.5 text-ink">MIJLPAAL · 02</Num>
+                    <div className="display text-[clamp(32px,4vw,44px)] leading-[0.9] tracking-[-0.04em]">
+                      ■
+                    </div>
+                  </div>
+                  <div>
+                    <h3 className="display text-[clamp(26px,3vw,34px)] tracking-[-0.03em] leading-[1.05] m-0">
+                      Live — versie 1.0
+                    </h3>
+                    <p className="text-[15.5px] leading-[1.65] mt-3.5 max-w-[620px]">
+                      In productie, met echte gebruikers. SLA gaat lopen, overdrachts­document
+                      ligt er, volgende iteratie staat al ingepland. Geen &ldquo;project-einde&rdquo; —
+                      het begin van doorontwikkeling.
+                    </p>
+                  </div>
+                </article>
               </RiseIn>
             </div>
           </div>
@@ -288,30 +382,31 @@ export default function WerkwijzePage() {
 
       {/* ============================ CTA ============================ */}
       <section>
-        <Container className="py-32 sm:py-36 text-center">
+        <Container className="pt-28 sm:pt-36 pb-28 sm:pb-36 text-center">
           <RiseIn>
-            <Num className="block mb-6">§ 007 — KENNISMAKING</Num>
+            <Num className="block mb-6">§ 005 — KENNISMAKING</Num>
           </RiseIn>
-          <RiseIn delay={0.05}>
-            <h2 className="display text-[clamp(48px,8vw,88px)] leading-[1.02] tracking-[-0.045em] m-0 mx-auto max-w-[1100px]">
-              Benieuwd hoe dit<br />voor jouw bedrijf<br />
-              <span className="text-teal-ink">uitpakt?</span>
+          <RiseIn delay={0.1}>
+            <h2 className="display text-[clamp(48px,7vw,88px)] leading-[1.02] tracking-[-0.045em] m-0 max-w-[1100px] mx-auto">
+              Klaar voor<br />
+              <span className="text-teal-ink">diamant één?</span>
             </h2>
           </RiseIn>
-          <RiseIn delay={0.15}>
+          <RiseIn delay={0.2}>
             <p className="text-[18px] text-ink-2 mt-7 max-w-[620px] mx-auto leading-[1.55]">
-              In een kennismaking van 30 minuten kijken we samen of er iets zinnigs te bouwen valt.
+              In een kennismaking van 30 minuten kijken we of er iets zinnigs te bouwen
+              valt.
             </p>
           </RiseIn>
-          <RiseIn delay={0.25}>
-            <div className="mt-12">
-              <Button
-                href={INTAKE_HREF}
-                size="lg"
-                endIcon={<ArrowRight size={14} strokeWidth={1.8} />}
+          <RiseIn delay={0.3}>
+            <div className="mt-10 inline-flex">
+              <Link
+                href={CONTACT_HREF}
+                className="btn-primary inline-flex items-center gap-2 px-7 py-4 rounded-full text-[15px] font-medium"
               >
                 Plan een kennismaking
-              </Button>
+                <ArrowRight size={14} strokeWidth={1.8} />
+              </Link>
             </div>
           </RiseIn>
         </Container>

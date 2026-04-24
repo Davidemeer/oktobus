@@ -52,7 +52,7 @@ export function IntakeForm() {
 
   return (
     <form action={action}>
-      <div className="num mb-6">§ 003 — INTAKE · 30 MIN</div>
+      <div className="num mb-6">§ 005 — INTAKE · 30 MIN</div>
 
       <div className="form-field">
         <label htmlFor="naam">→ Naam</label>
