@@ -41,6 +41,9 @@ const securityHeaders = [
 ];
 
 const nextConfig: NextConfig = {
+  // Standalone output bundles only the runtime files needed for `node server.js`.
+  // Used by the Docker image (Dockerfile) to keep the production image small.
+  output: 'standalone',
   async headers() {
     return [
       {

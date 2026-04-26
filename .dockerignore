@@ -1,0 +1,15 @@
+node_modules
+.next
+.git
+.gitignore
+.github
+.vscode
+.idea
+.DS_Store
+*.log
+*.md
+.env
+.env.*
+!.env.example
+README.md
+deploy.sh
