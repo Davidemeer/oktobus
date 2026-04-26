@@ -31,7 +31,7 @@ export function Header() {
   return (
     <header className="relative z-30">
       <Container className="pt-6 sm:pt-8 flex items-center justify-between">
-        <Link href="/" aria-label="Oktobus — naar home">
+        <Link href="/" aria-label="Oktobus · naar home">
           <LogoTile size="sm" />
         </Link>
 

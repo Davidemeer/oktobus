@@ -69,10 +69,14 @@ export async function submitIntake(
     return { status: 'success' };
   }
 
+  // From-adres: gebruik intake@oktobus.nl zodra het domein is geverifieerd in
+  // Resend; tot die tijd valt 'ie terug op resend.dev (geen DNS-setup vereist).
+  const from = process.env.RESEND_FROM ?? 'Oktobus <intake@oktobus.nl>';
+
   try {
     const resend = new Resend(apiKey);
     const result = await resend.emails.send({
-      from: 'Oktobus Intake <onboarding@resend.dev>',
+      from,
       to,
       replyTo: data.email,
       subject,
@@ -80,11 +84,11 @@ export async function submitIntake(
     });
     if (result.error) {
       console.error('Resend error:', result.error);
-      return { status: 'error', message: 'Verzenden mislukt. Probeer mailen naar contact@oktobus.com.' };
+      return { status: 'error', message: 'Verzenden mislukt. Probeer mailen naar david@oktobus.nl.' };
     }
     return { status: 'success' };
   } catch (err) {
     console.error('Intake submission failed:', err);
-    return { status: 'error', message: 'Er ging iets mis. Probeer mailen naar contact@oktobus.com.' };
+    return { status: 'error', message: 'Er ging iets mis. Probeer mailen naar david@oktobus.nl.' };
   }
 }
