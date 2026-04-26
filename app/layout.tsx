@@ -21,13 +21,13 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: 'Oktobus — AI-software op maat',
+    default: 'Oktobus · AI-software op maat',
     template: '%s · Oktobus',
   },
   description:
     'AI-software op maat. Product, Design en Engineering onder één dak. Production-ready, niet prototype-met-plakband.',
   openGraph: {
-    title: 'Oktobus — AI-software op maat',
+    title: 'Oktobus · AI-software op maat',
     description:
       'AI-software op maat. Production-ready, niet prototype-met-plakband.',
     type: 'website',
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Oktobus — AI-software op maat',
+    title: 'Oktobus · AI-software op maat',
     description: 'AI-software op maat.',
   },
 };
