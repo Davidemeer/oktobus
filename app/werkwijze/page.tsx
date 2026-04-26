@@ -149,7 +149,7 @@ export default function WerkwijzePage() {
                   Van prototype<br />naar productie-rijp
                   <br />onderdeel van de organisatie.
                 </h2>
-                <Num className="block mt-5 text-teal-ink">→ 4–8 WEKEN.</Num>
+                <Num className="block mt-5 text-teal-ink">→ 4–12 WEKEN.</Num>
                 <p className="text-[16px] leading-[1.65] mt-6 max-w-[420px]">
                   Zodra het prototype draagvlak heeft, werken we toe naar productie. We
                   verbeteren op basis van écht gebruik en integreren in het IT-landschap,

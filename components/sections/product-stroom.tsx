@@ -40,8 +40,7 @@ export function ProductStroom() {
                   <span className="pdCv3-chip">Hugging Face</span>
                   <span className="pdCv3-chip">Mistral</span>
                   <span className="pdCv3-chip">Llama</span>
-                  <span className="pdCv3-chip">Cursor</span>
-                  <span className="pdCv3-chip">Copilot</span>
+                  <span className="pdCv3-chip">Codex</span>
                   <span className="pdCv3-chip">LangChain</span>
                   <span className="pdCv3-chip">Ollama</span>
                   <span className="pdCv3-chip">Whisper</span>
@@ -95,8 +94,6 @@ export function ProductStroom() {
                   <span className="pdCv3-gate"><span className="g">✓</span> package-updates</span>
                   <span className="pdCv3-gate"><span className="g">✓</span> code-versioning</span>
                   <span className="pdCv3-gate"><span className="g">✓</span> lint</span>
-                  <span className="pdCv3-gate"><span className="g">✓</span> unit-tests</span>
-                  <span className="pdCv3-gate"><span className="g">✓</span> e2e-tests</span>
                   <span className="pdCv3-gate"><span className="g">✓</span> type-check</span>
                   <span className="pdCv3-gate"><span className="g">✓</span> build</span>
                   <span className="pdCv3-gate"><span className="g">✓</span> audit</span>
