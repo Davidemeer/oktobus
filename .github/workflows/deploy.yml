@@ -1,0 +1,99 @@
+name: Deploy
+
+on:
+  workflow_run:
+    workflows: [CI]
+    types: [completed]
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: production-deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Deploy naar productie
+    runs-on: ubuntu-latest
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Bepaal deploy tag
+        id: tag
+        run: |
+          TAG="deploy/$(date -u +'%Y-%m-%d-%H%M')"
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+          echo "Deploy tag: $TAG"
+
+      - name: Tag deploy in git
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git tag "${{ steps.tag.outputs.tag }}"
+          git push origin "${{ steps.tag.outputs.tag }}"
+
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ vars.DEPLOY_HOST }}
+          username: ${{ vars.DEPLOY_USER }}
+          key: ${{ secrets.DEPLOY_SSH_KEY }}
+          command_timeout: 10m
+          script: |
+            set -e
+            cd /opt/oktobus
+
+            echo "=== 1. Snapshot huidige staat (rollback-anker) ==="
+            PREV_SHA=$(git rev-parse HEAD)
+            echo "Prev SHA: $PREV_SHA"
+
+            rollback() {
+              echo "!!! ROLLBACK naar $PREV_SHA !!!"
+              git reset --hard "$PREV_SHA"
+              docker compose build || true
+              docker compose up -d || true
+              exit 1
+            }
+
+            echo "=== 2. Pull latest code ==="
+            git fetch origin main
+            git reset --hard origin/main
+
+            echo "=== 3. Build image (container nog niet aangeraakt) ==="
+            if ! docker compose build; then
+              echo "Build mislukt — code revert, container ongewijzigd."
+              git reset --hard "$PREV_SHA"
+              exit 1
+            fi
+
+            echo "=== 4. Restart met nieuwe image ==="
+            if ! docker compose up -d; then
+              echo "up -d mislukt — rollback."
+              rollback
+            fi
+
+            echo "=== 5. Health check (max 60s) ==="
+            HEALTH_OK=0
+            for i in $(seq 1 12); do
+              sleep 5
+              if docker compose exec -T app wget --quiet --tries=1 --spider http://127.0.0.1:3000/ > /dev/null 2>&1; then
+                HEALTH_OK=1
+                echo "App healthy na ${i} pogingen"
+                break
+              fi
+              echo "Health check poging $i/12..."
+            done
+
+            if [ "$HEALTH_OK" -ne 1 ]; then
+              echo "App niet healthy na 60s — rollback."
+              docker compose logs --tail=50 app || true
+              rollback
+            fi
+
+            docker compose ps
+            echo "=== Deploy klaar: ${{ steps.tag.outputs.tag }} ==="
