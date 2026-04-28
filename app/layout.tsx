@@ -20,24 +20,27 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://oktobus.nl'),
   title: {
     default: 'Oktobus · AI-software op maat',
     template: '%s · Oktobus',
   },
   description:
-    'AI-software op maat. Product, Design en Engineering onder één dak. Production-ready, niet prototype-met-plakband.',
+    'Software op maat, gebouwd met de mogelijkheden en snelheid van vandaag.',
   openGraph: {
-    title: 'Oktobus · AI-software op maat',
+    title: 'Oktobus',
     description:
-      'AI-software op maat. Production-ready, niet prototype-met-plakband.',
+      'Software op maat, gebouwd met de mogelijkheden en snelheid van vandaag.',
     type: 'website',
     locale: 'nl_NL',
     siteName: 'Oktobus',
+    url: 'https://oktobus.nl',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Oktobus · AI-software op maat',
-    description: 'AI-software op maat.',
+    title: 'Oktobus',
+    description:
+      'Software op maat, gebouwd met de mogelijkheden en snelheid van vandaag.',
   },
 };
 

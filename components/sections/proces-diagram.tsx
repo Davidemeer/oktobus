@@ -47,7 +47,7 @@ export function ProcesDiagram() {
             <polygon className="proc-shape" points="810,30 1170,250 810,470 1055,250" fill="#203A35" />
             <circle className="proc-milestone" cx="450" cy="250" r="8" fill="#F3EFE9" stroke="#2F6E66" strokeWidth="1.5" />
             <text x="450" y="450" textAnchor="middle" fontFamily="Geist Mono" fontSize="16" letterSpacing="2" fontWeight="500" fill="#63615C">DEMO V1.0</text>
-            <PhaseLabel x={810} title="Livegang" sub="4–8 WEKEN" />
+            <PhaseLabel x={810} title="Livegang" sub="4–12 WEKEN" />
           </g>
 
           {/* Doorontwikkeling phase */}

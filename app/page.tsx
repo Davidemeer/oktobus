@@ -56,7 +56,7 @@ export default function HomePage() {
               <FadeIn delay={0.45}>
                 <p className="text-[19px] leading-[1.55] mt-10 max-w-[520px]">
                   Met Oktobus combineren wij Product, Design en Engineering. Wij helpen
-                  jouw bedrijf om legacy software te vervangen door moderne software
+                  jouw bedrijf om legacy software te vervangen voor moderne software
                   volledig geïntegreerd met AI.
                 </p>
               </FadeIn>
@@ -86,9 +86,9 @@ export default function HomePage() {
                       Wij helpen van ontwerp<br />tot realisatie.
                     </h3>
                     <p className="promise-body">
-                      Technologie en software zijn nooit de oplossing of het probleem
-                      alleen. Wij combineren dit met ruime ervaring in digitale-, product-
-                      en AI-strategie.
+                      Technologie en software zijn nooit op zichzelf de oplossing.
+                      Wij combineren dit met ruime ervaring in digitale-, product- en
+                      AI-strategie.
                     </p>
                   </article>
 
@@ -97,7 +97,7 @@ export default function HomePage() {
                       <span className="promise-num">02</span>
                     </div>
                     <h3 className="promise-title">
-                      Ervaren team,<br />met Product, Design en Engineering.
+                      Ervaren team,<br />vanuit Product, Design en Engineering.
                     </h3>
                     <p className="promise-body">
                       Om goede producten en software te bouwen zijn deze drie disciplines
