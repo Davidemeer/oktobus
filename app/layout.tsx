@@ -26,11 +26,11 @@ export const metadata: Metadata = {
     template: '%s · Oktobus',
   },
   description:
-    'Software op maat, gebouwd met de mogelijkheden en snelheid van vandaag.',
+    'Software en AI op maat, gebouwd met de snelheid van vandaag.',
   openGraph: {
     title: 'Oktobus',
     description:
-      'Software op maat, gebouwd met de mogelijkheden en snelheid van vandaag.',
+      'Software en AI op maat, gebouwd met de snelheid van vandaag.',
     type: 'website',
     locale: 'nl_NL',
     siteName: 'Oktobus',
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Oktobus',
     description:
-      'Software op maat, gebouwd met de mogelijkheden en snelheid van vandaag.',
+      'Software en AI op maat, gebouwd met de snelheid van vandaag.',
   },
 };
 

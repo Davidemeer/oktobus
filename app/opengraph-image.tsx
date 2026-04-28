@@ -63,11 +63,10 @@ export default async function Image() {
             maxWidth: 1040,
           }}
         >
-          <span>Software op maat,</span>
-          <span>gebouwd met de</span>
+          <span>Software en AI op maat,</span>
+          <span>gebouwd met de snelheid</span>
           <span>
-            snelheid van{' '}
-            <span style={{ color: TEAL_INK }}>vandaag.</span>
+            van <span style={{ color: TEAL_INK }}>vandaag.</span>
           </span>
         </div>
 
