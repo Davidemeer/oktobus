@@ -15,9 +15,6 @@ export function Footer() {
         <div className="footer-grid">
           <div>
             <div className="footer-head">Oktobus.</div>
-            <p className="footer-sub">
-              Maatwerk software met AI als bouwsteen, niet als feature.
-            </p>
           </div>
           <div className="footer-col">
             <h4>→ Navigatie</h4>
