@@ -66,7 +66,7 @@ export default async function Image() {
           <span>Software en AI op maat,</span>
           <span>gebouwd met de snelheid</span>
           <span>
-            van <span style={{ color: TEAL_INK }}>vandaag.</span>
+            van{' '}<span style={{ color: TEAL_INK }}>vandaag.</span>
           </span>
         </div>
 
