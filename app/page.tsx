@@ -281,6 +281,12 @@ export default function HomePage() {
                     Plan een kennismaking
                     <ArrowRight size={14} strokeWidth={1.8} />
                   </Link>
+                  <span
+                    className="font-mono text-[11px] tracking-[0.1em]"
+                    style={{ color: '#F3EFE966' }}
+                  >
+                    → Volgend slot · Q3 &rsquo;26
+                  </span>
                 </div>
               </RiseIn>
             </div>
