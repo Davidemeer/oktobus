@@ -86,9 +86,10 @@ export default function HomePage() {
                       Wij helpen van ontwerp<br />tot realisatie.
                     </h3>
                     <p className="promise-body">
-                      Technologie en software zijn nooit op zichzelf de oplossing.
-                      Wij combineren dit met ruime ervaring in digitale-, product- en
-                      AI-strategie.
+                      Software moet jullie bedrijf verder helpen door in elke
+                      stap AI zoveel mogelijk het werk te laten doen. Wij
+                      combineren technische realisatie met ruime ervaring in
+                      digitale-, product- en AI-strategie.
                     </p>
                   </article>
 
@@ -115,8 +116,9 @@ export default function HomePage() {
                     </h3>
                     <p className="promise-body">
                       AI geeft ons snelheid, onze ervaring zorgt voor kwaliteit richting
-                      productie. Door deze aanpak ontwikkelen wij software voor een fractie
-                      van de traditionele prijs.
+                      productie. Al in de eerste weken bouwen en testen we
+                      AI-integraties en workflows, zodat jullie snel zien wat er
+                      mogelijk is.
                     </p>
                   </article>
                 </div>
