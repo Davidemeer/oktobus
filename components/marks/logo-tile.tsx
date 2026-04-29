@@ -17,9 +17,9 @@ const tileClass: Record<LogoTileSize, string> = {
 };
 
 const logoSize: Record<LogoTileSize, number> = {
-  sm: 17,
-  md: 28,
-  lg: 40,
+  sm: 22,
+  md: 36,
+  lg: 52,
 };
 
 const wordmarkSize: Record<LogoTileSize, string> = {
